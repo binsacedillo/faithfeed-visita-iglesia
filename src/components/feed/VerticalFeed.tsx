@@ -121,31 +121,42 @@ const VerticalFeed: React.FC = () => {
         </React.Fragment>
       ))}
 
-      {/* End of Feed: Return to Start */}
-      <section className={styles.endCard}>
-        <div className="glass" style={{ padding: '3rem 2rem', borderRadius: '32px', textAlign: 'center', maxWidth: '85%' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1.5rem', opacity: 0.8 }}>🕊️</div>
-          <h2 style={{ marginBottom: '0.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>The Silence of the Tomb</h2>
-          <p style={{ marginBottom: '2rem', opacity: 0.6, fontSize: '1rem', lineHeight: '1.5' }}>
-            You have completed your pilgrimage. May the peace of the Lord be always with you.
-          </p>
+      {/* End of Feed: Minimalist Return to Start */}
+      <section 
+        className={styles.endCard}
+        style={{ backgroundImage: "url('/backgrounds/outro.jpg')" }}
+      >
+        <div className={styles.headerOverlay} style={{ opacity: 0.6 }} />
+        <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
           <button 
             className="glass" 
             onClick={scrollToTop}
             style={{ 
-              padding: '14px 40px', 
-              borderRadius: '24px', 
+              padding: '1.25rem 3rem', 
+              borderRadius: '50px', 
               color: 'var(--accent-gold)', 
               fontWeight: 800,
-              fontSize: '0.9rem',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase'
+              fontSize: '0.85rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              border: '1px solid var(--accent-gold)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              boxShadow: '0 0 25px rgba(255, 202, 40, 0.15)',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
             }}
           >
-             Begin New Journey
+             ↑ BEGIN THE JOURNEY AGAIN
           </button>
-          <div style={{ marginTop: '3rem', fontSize: '0.65rem', opacity: 0.3, letterSpacing: '0.1em' }}>
-            © 2026 VINCE GIO ACEDILLO. ALL RIGHTS RESERVED.
+          <div style={{ 
+            fontSize: '0.65rem', 
+            opacity: 0.5, 
+            letterSpacing: '0.1em', 
+            fontWeight: 300, 
+            fontFamily: 'var(--font-serif)',
+            fontStyle: 'italic'
+          }}>
+            A 2026 Holy Week Offering by Vince Gio Acedillo
           </div>
         </div>
       </section>
