@@ -47,6 +47,12 @@
   padding-bottom: 4rem; /* Space for scroll indicator */
 }
 
+@media (min-width: 1024px) {
+  .content {
+    max-width: 800px;
+  }
+}
+
 .content::-webkit-scrollbar {
   display: none;
 }
