@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata, type Viewport } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
+import ServiceWorkerRegistration from "~/components/pwa/ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
   title: "Faith Feed | Holy Week 2026",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body>
+        <ServiceWorkerRegistration />
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
