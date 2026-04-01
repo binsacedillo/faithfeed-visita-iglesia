@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: "Faith Feed | Holy Week 2026",
   description: "A digital sanctuary for Gen Z. Reflections, Scripture, and Stations for the Triduum.",
   manifest: "/manifest.webmanifest",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/icons/icon-192x192.png" },
+    { rel: "apple-touch-icon", url: "/icons/icon-192x192.png" }
+  ],
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
