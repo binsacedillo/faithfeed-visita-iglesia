@@ -7,7 +7,12 @@ const VisitaIglesiaCard: React.FC = () => {
   return (
     <section 
       className={`${styles.card} shimmer`}
-      style={{ backgroundImage: "url('/backgrounds/header.jpeg')" }}
+      style={{ 
+        backgroundImage: "url('/backgrounds/header.jpeg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
       <div className={styles.overlay} />
       <div className={styles.content} style={{ textAlign: 'center', paddingTop: '4rem' }}>
