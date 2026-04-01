@@ -129,22 +129,8 @@ const VerticalFeed: React.FC = () => {
         <div className={styles.headerOverlay} style={{ opacity: 0.6 }} />
         <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
           <button 
-            className="glass" 
+            className={`glass ${styles.finaleBtn}`}
             onClick={scrollToTop}
-            style={{ 
-              padding: '1.25rem 3rem', 
-              borderRadius: '50px', 
-              color: 'var(--accent-gold)', 
-              fontWeight: 800,
-              fontSize: '0.85rem',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              border: '1px solid var(--accent-gold)',
-              background: 'rgba(255, 255, 255, 0.05)',
-              boxShadow: '0 0 25px rgba(255, 202, 40, 0.15)',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
           >
              ↑ BEGIN THE JOURNEY AGAIN
           </button>
