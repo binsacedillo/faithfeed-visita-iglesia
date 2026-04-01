@@ -23,6 +23,7 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
       scriptureRef: "John 13:1",
       content: "Before the feast of Passover, Jesus knew that his hour had come to pass from this world to the Father. He loved them to the end.",
       author: "Jesus loved “to the end.” How far does my love go?",
+      imageUrl: "/backgrounds/headerthursday.jpeg",
     },
     {
       type: "SCRIPTURE",
