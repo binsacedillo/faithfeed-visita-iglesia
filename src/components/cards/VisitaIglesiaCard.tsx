@@ -1,9 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ContentCard.module.css";
 
 const VisitaIglesiaCard: React.FC = () => {
+  const [isStandalone, setIsStandalone] = useState(false);
+
+  useEffect(() => {
+    const checkStandalone = window.matchMedia('(display-mode: standalone)').matches 
+      || (window.navigator as any).standalone 
+      || document.referrer.includes('android-app://');
+    setIsStandalone(checkStandalone);
+  }, []);
+
   return (
     <section 
       className={`${styles.card} shimmer`}
@@ -66,6 +75,33 @@ const VisitaIglesiaCard: React.FC = () => {
             TO BEGIN YOUR PILGRIMAGE
           </p>
         </div>
+
+        {/* PWA Install Tip - Only show if not already installed/standalone */}
+        {!isStandalone && (
+          <div className="glass" style={{ 
+            marginTop: '2rem', 
+            padding: '1rem', 
+            borderRadius: '16px', 
+            border: '1px dashed var(--accent-gold)',
+            background: 'rgba(255, 202, 40, 0.05)',
+            width: '100%',
+            maxWidth: '340px',
+            margin: '2rem auto 0'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '1.2rem' }}>📲</span>
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-gold)', letterSpacing: '0.05em' }}>
+                STAY CONNECTED OFFLINE
+              </h4>
+            </div>
+            <p style={{ fontSize: '0.75rem', opacity: 0.8, lineHeight: '1.4' }}>
+              Add to <strong>Home Screen</strong> to use this guide as an app, even in churches without signal.
+            </p>
+            <div style={{ marginTop: '0.75rem', fontSize: '0.7rem', opacity: 0.6, fontWeight: 600 }}>
+              TIP: Tap <span style={{ color: 'var(--accent-gold)' }}>Share</span> (iOS) or <span style={{ color: 'var(--accent-gold)' }}>Menu ⋮</span> (Android) and choose <strong>"Add to Home Screen"</strong>.
+            </div>
+          </div>
+        )}
 
         {/* Elegant Attribution Footer */}
         <div style={{ marginTop: 'auto', paddingTop: '3rem', fontSize: '0.6rem', opacity: 0.2, letterSpacing: '0.05em', fontWeight: 600 }}>
