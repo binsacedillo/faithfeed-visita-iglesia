@@ -43,6 +43,7 @@ const VerticalFeed: React.FC = () => {
     const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
     
     const thu = new Date(easter); thu.setDate(easter.getDate() - 3);
+    const wed = new Date(thu); wed.setDate(thu.getDate() - 1);
     const fri = new Date(easter); fri.setDate(easter.getDate() - 2);
     const sat = new Date(easter); sat.setDate(easter.getDate() - 1);
 
@@ -51,7 +52,7 @@ const VerticalFeed: React.FC = () => {
       return d1M === time;
     };
 
-    if (isSameDay(thu, todayMidnight)) setCurrentDay("THURSDAY");
+    if (isSameDay(thu, todayMidnight) || isSameDay(wed, todayMidnight)) setCurrentDay("THURSDAY");
     else if (isSameDay(fri, todayMidnight)) setCurrentDay("FRIDAY");
     else if (isSameDay(sat, todayMidnight)) setCurrentDay("SATURDAY");
     else if (isSameDay(easter, todayMidnight)) setCurrentDay("EASTER");
