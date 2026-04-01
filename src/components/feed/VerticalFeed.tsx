@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { api } from "~/trpc/react";
 import ContentCard from "../cards/ContentCard";
 import VisitaIglesiaCard from "../cards/VisitaIglesiaCard";
@@ -59,13 +60,20 @@ const VerticalFeed: React.FC = () => {
     else setCurrentDay(null);
   }, []);
 
+  const scrollRef = useRef<number | null>(null);
+
   const handleScroll = () => {
-    // ...
-    if (!containerRef.current) return;
-    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
-    const totalScrollableHeight = scrollHeight - clientHeight;
-    const progress = (scrollTop / (totalScrollableHeight || 1)) * 100;
-    setScrollProgress(progress);
+    if (scrollRef.current) return;
+
+    scrollRef.current = window.requestAnimationFrame(() => {
+      if (containerRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+        const totalScrollableHeight = scrollHeight - clientHeight;
+        const progress = (scrollTop / (totalScrollableHeight || 1)) * 100;
+        setScrollProgress(progress);
+      }
+      scrollRef.current = null;
+    });
   };
 
   const scrollToTop = () => {
@@ -131,18 +139,22 @@ const VerticalFeed: React.FC = () => {
 
       {/* Section Header: Today's Word (Daily Liturgy Intro) */}
       {todayScriptures.length > 0 && (
-        <section 
-          className={styles.sectionHeaderCard}
-          style={{ 
-            backgroundImage: `url('${
+        <section className={styles.sectionHeaderCard}>
+          <Image 
+            src={
               currentDay === "THURSDAY" ? "/backgrounds/headerthursday.jpeg" : 
               currentDay === "FRIDAY" ? "/backgrounds/fridayheader.jpg" :
               currentDay === "SATURDAY" ? "/backgrounds/saturdayheader.jpg" :
               currentDay === "EASTER" ? "/backgrounds/easterheader.jpg" : 
               "/backgrounds/header.jpg"
-            }')` 
-          }}
-        >
+            }
+            alt="Liturgy Header"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
+            className={styles.bgImage}
+          />
           <div className={styles.headerOverlay} />
           <div className="glass" style={{ padding: '3rem 2rem', borderRadius: '32px', textAlign: 'center', width: '85%', zIndex: 2, border: '1px solid var(--accent-gold)' }}>
             <div style={{ fontSize: '2.5rem', marginBottom: '1rem', filter: 'drop-shadow(0 0 10px rgba(255, 202, 40, 0.3))' }}>
@@ -186,16 +198,19 @@ const VerticalFeed: React.FC = () => {
       ))}
 
       {/* End of Feed: Minimalist Return to Start */}
-      <section 
-        className={styles.endCard}
-        style={{ 
-          backgroundImage: `url('${
+      <section className={styles.endCard}>
+        <Image 
+          src={
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" :
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" :
             currentDay === "EASTER" ? "/backgrounds/easter.jpg" : "/backgrounds/outro.jpg"
-          }')` 
-        }}
-      >
+          }
+          alt="Conclusion"
+          fill
+          sizes="100vw"
+          style={{ objectFit: 'cover' }}
+          className={styles.bgImage}
+        />
         <div className={styles.headerOverlay} style={{ opacity: 0.6 }} />
         <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
           <button 

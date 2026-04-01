@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import styles from "./ContentCard.module.css";
 
 interface ContentCardProps {
@@ -135,14 +136,21 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => 
     );
   };
 
-  const cardStyle = (customBackground || post.imageUrl) ? {
-    backgroundImage: `url(${customBackground ?? post.imageUrl})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  } : {};
+  const bgImage = customBackground ?? post.imageUrl;
 
   return (
-    <section className={`${styles.card} ${post.stationNumber ? styles.stationCard : ''}`} style={cardStyle}>
+    <section className={`${styles.card} ${post.stationNumber ? styles.stationCard : ''}`}>
+      {bgImage && (
+        <Image 
+          src={bgImage} 
+          alt={post.title} 
+          fill 
+          sizes="100vw"
+          priority={post.type === "SCRIPTURE"} // Faster loading for essential liturgy
+          style={{ objectFit: 'cover' }}
+          className={styles.bgImage}
+        />
+      )}
       <div className={styles.overlay} />
       {renderContent()}
     </section>
