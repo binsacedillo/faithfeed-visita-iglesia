@@ -1,0 +1,292 @@
+.card {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1rem 6rem 1rem; /* Reduced top/side padding */
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stationHeader {
+  padding-top: 5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 2, 22, 0.3) 0%,
+    rgba(13, 2, 22, 0.7) 40%,
+    rgba(13, 2, 22, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensure scrolling starts at top */
+  gap: 0.75rem;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+  overscroll-behavior-y: contain; /* Isolate scroll to card */
+  padding-bottom: 4rem; /* Space for scroll indicator */
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.focusIcon {
+  font-size: 1.5rem;
+  opacity: 0.4;
+  margin-bottom: 0.25rem;
+  color: var(--accent-gold);
+}
+
+.typeBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+  margin-bottom: 0.75rem; /* Increased for better separation */
+  opacity: 0.8;
+}
+
+.scriptureText {
+  font-size: 1.65rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.reflectionTitle {
+  font-size: 2.5rem; /* Slightly larger */
+  font-weight: 800;
+  margin-bottom: 1.5rem; /* More space below title */
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.1em;
+  color: var(--text-primary);
+  background: linear-gradient(to right, #fff, var(--accent-gold));
+  -webkit-background-clip: text;
+  background-clip: text; /* Added for standard fix */
+  -webkit-text-fill-color: transparent;
+}
+
+.reflectionBody {
+  font-size: 1.25rem; /* Larger for better readability */
+  line-height: 1.8;   /* Airier spacing */
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.prayerToggle {
+  align-self: flex-start;
+  padding: 0.6rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin: 1rem 0;
+  transition: all 0.2s ease;
+}
+
+.prayerBox {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-top: 0.5rem;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.response {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  border-left: 2px solid var(--accent-purple);
+  padding-left: 1rem;
+}
+
+.prayerText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.reminders {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  opacity: 0.6;
+  color: var(--accent-gold);
+  text-align: center;
+}
+
+.authorRef {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+/* Drawer System */
+.drawerSection {
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.drawerToggle {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.drawerContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 0 12px 12px;
+}
+
+.drawerContent.open {
+  max-height: none; /* Let the content show in full */
+  opacity: 1;
+  padding: 1.5rem;
+  margin-top: -8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: none;
+  overflow-y: visible; /* Let the parent card's scroll handle it */
+}
+
+.goldHeader {
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.sectionHeader {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+.salutationBox {
+  background: rgba(147, 51, 234, 0.1);
+  border-left: 3px solid var(--accent-purple);
+  padding: 1rem;
+  border-radius: 4px 12px 12px 4px;
+  margin: 1rem 0;
+}
+
+.salutationText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-primary);
+  white-space: pre-line;
+}
+
+.bodyText {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-weight: 300;
+  white-space: pre-line;
+}
+
+.scriptureTextVerbatim {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Original Footer & Actions */
+.footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.amenBtn, .amened {
+  padding: 0.8rem 1.75rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: white;
+}
+
+.amened {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.shareBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: white;
+}
+
+.ref {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  opacity: 0.8;
+}

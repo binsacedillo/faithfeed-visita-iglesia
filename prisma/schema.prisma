@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Post {
+    id            String   @id @default(cuid())
+    type          String   // REFLECT, SCRIPTURE, STATION
+    title         String
+    content       String
+    author        String?
+    scriptureRef  String?
+    imageUrl      String?
+    stationNumber Int?
+    prayerText    String?
+    prayerResponse String?
+    introText     String?
+    outroText     String?
+    scheduledDay  String?  // THURSDAY, FRIDAY, SATURDAY
+    closingPrayer Boolean @default(false)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@index([type])
+}
