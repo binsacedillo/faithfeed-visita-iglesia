@@ -169,6 +169,7 @@ const VerticalFeed: React.FC = () => {
           key={post.id} 
           post={post} 
           customBackground={
+            currentDay === "THURSDAY" ? "/backgrounds/thursday.jpg" :
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" : 
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" : 
             undefined
