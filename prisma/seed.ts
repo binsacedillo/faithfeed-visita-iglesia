@@ -136,7 +136,7 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
       title: "Closing Prayer",
       content: "Lord Jesus, thank You for allowing me to walk with You in Your Passion through this Visita Iglesia. May these reflections remain in my heart and guide my life. Help me grow in faith, hope, and love each day. Amen.\n\n† Final Sign of the Cross:\nIn the name of the Father, and of the Son, and of the Holy Spirit. Amen.",
       author: "Vince Gio Acedillo",
-      imageUrl: "/backgrounds/outro.jpg",
+      imageUrl: "/backgrounds/guide.jpg",
     },
   ];
 
