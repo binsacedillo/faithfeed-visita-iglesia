@@ -1,29 +1,48 @@
-# Create T3 App
+# ⛪ Faith Feed: Visita Iglesia 2026
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+**Faith Feed** is a high-fidelity, meditative PWA designed for the Holy Week 2026 pilgrimage. It provides a structured, distraction-free environment for the traditional **7-Church Visita Iglesia** and **Triduum** devotions.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## ✨ Key Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **🙏 7-Church Pilgrimage**: Curated liturgical content for each station, including themes, verbatim Gospel readings, and reflections.
+- **📜 Full Traditional Prayers**: Immediate access to the *Our Father*, *Hail Mary*, and *Glory Be* at every station for easy recitation.
+- **🕊️ Triduum Focus**: Date-aware scripture cards for Holy Thursday, Good Friday, and Holy Saturday.
+- **📱 PWA & Offline Support**: Designed to work as a mobile app, keeping your devotions accessible even with poor signal in busy cathedrals.
+- **🎨 ISO-Compliant UX**: An elegant, one-thumb-accessible interface with a glassmorphic bottom-center navigation dock.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+---
 
-## Learn More
+## 🖼️ Personalizing Your Backgrounds
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+The app is built to be a deeply personal experience. You can add your own sacred images by following these steps:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+1. Place your `.jpg` or `.jpeg` files in `public/backgrounds/`.
+2. Name them as follows:
+   - `header.jpeg` (Welcome Landing Guide)
+   - `intro.jpg` (Opening Prayer)
+   - `station1.jpg` to `station7.jpg` (The 7 Churches)
+   - `outro.jpg` (Closing Prayer)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+---
 
-## How do I deploy this?
+## 🛠️ Technology Stack
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Framework**: [Next.js 15](https://nextjs.org/) (T3 Stack)
+- **Database**: [SQLite](https://www.sqlite.org/) with [Prisma](https://www.prisma.io/)
+- **API**: [tRPC](https://trpc.io/)
+- **PWA**: [Serwist](https://serwist.js.org/)
+- **Styling**: Vanilla CSS with Glassmorphism and modern design tokens.
+
+---
+
+## 👨‍💻 Maker
+
+Designed and built for Holy Week 2026 by **Vince Gio Acedillo**.
+
+---
+
+## 📜 License
+
+© 2026 Vince Gio Acedillo. All Rights Reserved.
