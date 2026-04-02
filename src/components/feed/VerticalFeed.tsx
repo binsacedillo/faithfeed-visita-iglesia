@@ -12,6 +12,7 @@ const VerticalFeed: React.FC = () => {
   const { data: posts, isLoading } = api.post.getAll.useQuery(undefined, {
     staleTime: 1000 * 60 * 5, // Keep data fresh for 5 minutes
     refetchOnWindowFocus: false, // Don't refetch when focusing the browser
+    retry: 1, // Only retry once to avoid query loop on persistent errors
   });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentDay, setCurrentDay] = useState<string | null>(null);
