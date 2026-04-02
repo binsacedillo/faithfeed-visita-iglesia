@@ -20,6 +20,7 @@ export const postRouter = createTRPCRouter({
     .input(
       z.object({
         type: z.string(),
+        category: z.string().optional(),
         title: z.string(),
         content: z.string(),
         author: z.string().optional(),
@@ -32,6 +33,7 @@ export const postRouter = createTRPCRouter({
       return ctx.db.post.create({
         data: {
           type: input.type,
+          category: input.category ?? "GENERAL",
           title: input.title,
           content: input.content,
           author: input.author,
