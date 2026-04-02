@@ -260,7 +260,7 @@ const VerticalFeed: React.FC = () => {
             marginTop: '2rem',
             color: 'var(--text-primary)'
           }}>
-            A 2026 Holy Week Offering by Vince Gio Acedillo
+            A {new Date().getFullYear()} Holy Week Offering by Vince Gio Acedillo
             <div style={{ 
               opacity: 1, 
               marginTop: '1.25rem', 
