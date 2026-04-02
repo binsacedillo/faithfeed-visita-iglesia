@@ -9,7 +9,10 @@ import StationsGuideCard from "../cards/StationsGuideCard";
 import styles from "./VerticalFeed.module.css";
 
 const VerticalFeed: React.FC = () => {
-  const { data: posts, isLoading } = api.post.getAll.useQuery();
+  const { data: posts, isLoading } = api.post.getAll.useQuery(undefined, {
+    staleTime: 1000 * 60 * 5, // Keep data fresh for 5 minutes
+    refetchOnWindowFocus: false, // Don't refetch when focusing the browser
+  });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentDay, setCurrentDay] = useState<string | null>(null);
   const [selectedDevotion, setSelectedDevotion] = useState<"VISITA_IGLESIA" | "STATIONS_OF_CROSS">("VISITA_IGLESIA");
