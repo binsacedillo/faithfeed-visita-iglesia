@@ -167,7 +167,7 @@ const VerticalFeed: React.FC = () => {
               currentDay === "FRIDAY" ? "/backgrounds/fridayheader.jpg" :
               currentDay === "SATURDAY" ? "/backgrounds/saturdayheader.jpg" :
               currentDay === "EASTER" ? "/backgrounds/easterheader.jpg" : 
-              "/backgrounds/header.jpg"
+              "/backgrounds/header.jpeg"
             }
             alt="Liturgy Header"
             fill
