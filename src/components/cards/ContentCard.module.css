@@ -15,19 +15,115 @@
 .bgImage {
   z-index: 0;
   pointer-events: none;
+  filter: blur(4px) brightness(0.65) saturate(0.85); /* ISO UX: Reduce visual noise */
+  transition: filter 0.5s ease;
 }
 
 .stationHeader {
-  padding-top: 5rem;
+  padding-top: 7rem;
   margin-bottom: 2rem;
   position: relative;
+  text-align: center;
+  /* Glass filter background behind Roman numerals */
+  background: radial-gradient(circle at center, rgba(13, 2, 22, 0.4) 0%, transparent 60%);
+  backdrop-filter: blur(2px);
+  padding-bottom: 2rem;
+}
+
+.stationNumber {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 8rem; /* More prominent */
+  color: #fff; /* White for better contrast on dark */
+  opacity: 0.2; /* Subtle but clear */
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+  font-style: italic;
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.4); /* Glow effect */
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: var(--bg-overlay);
+  /* ISO UX: Darken top-down to ensure header contrast */
+  background: linear-gradient(
+    to bottom, 
+    rgba(13, 2, 22, 0.75) 0%, 
+    rgba(13, 2, 22, 0.5) 40%, 
+    rgba(13, 2, 22, 0.95) 100%
+  );
   z-index: 1;
+}
+
+/* Liguori Styling */
+.liguoriContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.versicleBlock {
+  border-left: 3px solid var(--accent-gold);
+  padding: 1.25rem 1.5rem;
+  font-style: normal;
+  opacity: 1;
+  background: rgba(255, 202, 40, 0.05);
+  border-radius: 0 16px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.label {
+  font-weight: 900;
+  color: var(--accent-gold);
+  margin-right: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+.instruction {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  font-style: italic;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.consideration {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.25rem;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.prayerResponse {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  text-align: left;
+  border-left: 2px solid var(--accent-purple);
+  padding-left: 1.5rem;
+  background: rgba(147, 51, 234, 0.03);
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.commonFooter {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-weight: 700;
+  margin-top: 1rem;
+  letter-spacing: 0.05em;
 }
 
 .content {
@@ -43,6 +139,7 @@
   overflow-y: auto;
   scrollbar-width: none;
   overscroll-behavior-y: contain; /* Isolate scroll to card */
+  padding-top: 6rem;
   padding-bottom: 4rem; /* Space for scroll indicator */
 }
 
@@ -83,24 +180,28 @@
 }
 
 .reflectionTitle {
-  font-size: 2.5rem; /* Slightly larger */
-  font-weight: 800;
-  margin-bottom: 1.5rem; /* More space below title */
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   padding-bottom: 0.1em;
-  color: var(--text-primary);
+  color: #ffffff; /* Use pure white for max contrast */
   background: var(--title-gradient);
   -webkit-background-clip: text;
-  background-clip: text; /* Added for standard fix */
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-style: italic;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Add depth for readability */
 }
 
 .reflectionBody {
-  font-size: 1.25rem; /* Larger for better readability */
-  line-height: 1.8;   /* Airier spacing */
-  color: var(--text-secondary);
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9); /* ISO UX: Increase text opacity */
   font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
 .prayerToggle {

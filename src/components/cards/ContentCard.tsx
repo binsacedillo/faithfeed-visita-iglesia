@@ -13,6 +13,7 @@ interface ContentCardProps {
     author?: string | null;
     scriptureRef?: string | null;
     imageUrl?: string | null;
+    category?: string | null;
     stationNumber?: number | null;
     prayerText?: string | null;
     prayerResponse?: string | null;
@@ -35,6 +36,11 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => 
     setIsVisible(true);
   }, [post.id]);
 
+  const toRoman = (num: number) => {
+    const roman = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV"];
+    return roman[num] ?? num;
+  };
+
   const renderContent = () => {
     return (
       <div 
@@ -43,9 +49,14 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => 
       >
         {post.stationNumber && (
           <div className={styles.stationHeader}>
-            <div className={styles.stationNumber}>{post.stationNumber}</div>
-            <span className={styles.typeBadge}>Visita Iglesia | Visit {post.stationNumber}</span>
+            <div className={styles.stationNumber}>{toRoman(post.stationNumber)}</div>
+            <span className={styles.typeBadge}>
+              {post.category === "STATIONS_OF_CROSS" 
+                ? `Stations of the Cross` 
+                : `Visita Iglesia | Visit ${post.stationNumber}`}
+            </span>
             <h2 className={styles.reflectionTitle}>{post.title}</h2>
+            <div style={{ height: '1px', background: 'var(--accent-gold)', width: '30px', margin: '0.5rem auto 1.5rem', opacity: 0.3 }} />
           </div>
         )}
 
@@ -72,65 +83,113 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => 
           </>
         )}
 
-        {/* STATION ONLY SECTIONS */}
-        {post.stationNumber === 1 && post.introText && (
-          <div className={styles.drawerSection}>
-            <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowIntro(!showIntro)}>
-              {showIntro ? "✕ Close Invitation" : "📖 Invitation & Opening Prayer"}
-            </button>
-            <div className={`${styles.drawerContent} ${showIntro ? styles.open : ""}`}>
-              <p className={styles.bodyText}>{post.introText}</p>
-            </div>
-          </div>
-        )}
-
-        {post.stationNumber && post.prayerResponse && (
-          <div className={styles.salutationBox} style={{ marginTop: '1.5rem' }}>
-            {post.prayerResponse.split('\n').map((line, i) => (
-              <p 
-                key={i} 
-                className={styles.salutationText}
-                style={line.startsWith('▲') ? { fontWeight: 700, color: 'var(--accent-gold)', marginBottom: '0.5rem' } : {}}
-              >
-                {line}
+        {/* Liguori Versicles/Responses & Reflections */}
+        {post.stationNumber && post.category === "STATIONS_OF_CROSS" && (
+          <div className={styles.liguoriContent}>
+            <div className={styles.versicleBlock}>
+              <p>
+                <span className={styles.label}>V:</span> 
+                We adore You, O Christ, and we praise You. 
+                <span className={styles.instruction}>(Genuflect)</span>
               </p>
-            ))}
-          </div>
-        )}
+              <p>
+                <span className={styles.label}>R:</span> 
+                Because, by Your holy cross, You have redeemed the world. 
+                <span className={styles.instruction}>(Rise)</span>
+              </p>
+            </div>
 
-        {post.stationNumber && post.scriptureRef && (
-          <div className={styles.drawerSection}>
-            <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowScripture(!showScripture)}>
-              {showScripture ? "✕ Close Scripture" : "🕯️ Read Holy Word"}
-            </button>
-            <div className={`${styles.drawerContent} ${showScripture ? styles.open : ""}`}>
-              <h3 className={styles.goldHeader}>{post.scriptureRef}</h3>
-              <p className={`${styles.scriptureTextVerbatim} serif`}>“{post.content}”</p>
+            {post.scriptureRef && (
+              <div className={styles.drawerSection}>
+                <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowScripture(!showScripture)}>
+                  {showScripture ? "✕ Close Scripture" : "🕯️ Read Holy Word"}
+                </button>
+                <div className={`${styles.drawerContent} ${showScripture ? styles.open : ""}`}>
+                  <h3 className={styles.goldHeader}>{post.scriptureRef}</h3>
+                  <p className={`${styles.scriptureTextVerbatim} serif`}>“{post.prayerText}”</p>
+                </div>
+              </div>
+            )}
+            
+            <div className={styles.consideration}>
+              <p style={{ fontStyle: 'italic', opacity: 0.8 }}>Consideration</p>
+              <p style={{ marginTop: '0.5rem' }}>{post.content}</p>
+            </div>
+
+            <div className={styles.prayerResponse}>
+              <span className={styles.label} style={{ display: 'block', marginBottom: '0.5rem' }}>Prayer</span>
+              <p>{post.prayerResponse}</p>
+            </div>
+
+            <div className={styles.commonFooter}>
+              <p>(Our Father, Hail Mary, Glory be.)</p>
             </div>
           </div>
         )}
 
-        {post.stationNumber && post.author && (
-          <div className={styles.drawerSection}>
-            <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowReflection(!showReflection)}>
-              {showReflection ? "✕ Close Reflection" : "✧ Open Reflection"}
-            </button>
-            <div className={`${styles.drawerContent} ${showReflection ? styles.open : ""}`}>
-              <h3 className={styles.sectionHeader}>Reflection</h3>
-              <p className={styles.bodyText}>{post.author}</p>
-            </div>
-          </div>
-        )}
+        {/* Visita Iglesia / Regular Style (Existing) */}
+        {post.stationNumber && post.category !== "STATIONS_OF_CROSS" && (
+          <>
+            {post.stationNumber === 1 && post.introText && (
+              <div className={styles.drawerSection}>
+                <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowIntro(!showIntro)}>
+                  {showIntro ? "✕ Close Invitation" : "📖 Invitation & Opening Prayer"}
+                </button>
+                <div className={`${styles.drawerContent} ${showIntro ? styles.open : ""}`}>
+                  <p className={styles.bodyText}>{post.introText}</p>
+                </div>
+              </div>
+            )}
 
-        {post.stationNumber === 7 && post.outroText && (
-          <div className={styles.drawerSection}>
-            <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowOutro(!showOutro)}>
-              {showOutro ? "✕ Close Final Prayers" : "🕊️ Final Prayers & Divine Praises"}
-            </button>
-            <div className={`${styles.drawerContent} ${showOutro ? styles.open : ""}`}>
-              <p className={styles.bodyText}>{post.outroText}</p>
-            </div>
-          </div>
+            {post.prayerResponse && (
+              <div className={styles.salutationBox} style={{ marginTop: '1.5rem' }}>
+                {post.prayerResponse.split('\n').map((line, i) => (
+                  <p 
+                    key={i} 
+                    className={styles.salutationText}
+                    style={line.startsWith('▲') ? { fontWeight: 700, color: 'var(--accent-gold)', marginBottom: '0.5rem' } : {}}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {post.scriptureRef && (
+              <div className={styles.drawerSection}>
+                <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowScripture(!showScripture)}>
+                  {showScripture ? "✕ Close Scripture" : "🕯️ Read Holy Word"}
+                </button>
+                <div className={`${styles.drawerContent} ${showScripture ? styles.open : ""}`}>
+                  <h3 className={styles.goldHeader}>{post.scriptureRef}</h3>
+                  <p className={`${styles.scriptureTextVerbatim} serif`}>“{post.content}”</p>
+                </div>
+              </div>
+            )}
+
+            {post.author && (
+              <div className={styles.drawerSection}>
+                <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowReflection(!showReflection)}>
+                  {showReflection ? "✕ Close Reflection" : "✧ Open Reflection"}
+                </button>
+                <div className={`${styles.drawerContent} ${showReflection ? styles.open : ""}`}>
+                  <h3 className={styles.sectionHeader}>Reflection</h3>
+                  <p className={styles.bodyText}>{post.author}</p>
+                </div>
+              </div>
+            )}
+
+            {post.stationNumber === 7 && post.outroText && (
+              <div className={styles.drawerSection}>
+                <button className={`glass ${styles.drawerToggle}`} onClick={() => setShowOutro(!showOutro)}>
+                  {showOutro ? "✕ Close Final Prayers" : "🕊️ Final Prayers & Divine Praises"}
+                </button>
+                <div className={`${styles.drawerContent} ${showOutro ? styles.open : ""}`}>
+                  <p className={styles.bodyText}>{post.outroText}</p>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     );

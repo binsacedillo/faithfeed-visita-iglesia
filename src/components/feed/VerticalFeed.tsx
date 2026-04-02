@@ -5,12 +5,14 @@ import Image from "next/image";
 import { api } from "~/trpc/react";
 import ContentCard from "../cards/ContentCard";
 import VisitaIglesiaCard from "../cards/VisitaIglesiaCard";
+import StationsGuideCard from "../cards/StationsGuideCard";
 import styles from "./VerticalFeed.module.css";
 
 const VerticalFeed: React.FC = () => {
   const { data: posts, isLoading } = api.post.getAll.useQuery();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentDay, setCurrentDay] = useState<string | null>(null);
+  const [selectedDevotion, setSelectedDevotion] = useState<"VISITA_IGLESIA" | "STATIONS_OF_CROSS">("VISITA_IGLESIA");
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -102,8 +104,9 @@ const VerticalFeed: React.FC = () => {
   }
 
   const todayScriptures = posts?.filter(p => p.scheduledDay === currentDay && currentDay !== null) ?? [];
-  const filteredGeneralPosts = posts?.filter(p => !p.scheduledDay) ?? [];
-  const firstStationIndex = filteredGeneralPosts.findIndex(p => p.type === "STATION");
+  const filteredGeneralPosts = posts?.filter(p => !p.scheduledDay && (p.category === selectedDevotion || p.category === "GENERAL")) ?? [];
+  
+  const isDevotionAvailable = currentDay === "THURSDAY" || currentDay === "FRIDAY";
 
   return (
     <main 
@@ -112,6 +115,24 @@ const VerticalFeed: React.FC = () => {
       ref={containerRef}
       data-theme={currentDay === "EASTER" ? "easter" : "default"}
     >
+      {/* Devotion Switcher */}
+      {isDevotionAvailable && (
+        <div className={styles.devotionSwitcher}>
+          <button 
+            className={`${styles.switcherBtn} ${selectedDevotion === "VISITA_IGLESIA" ? styles.activeSwitcher : ""}`}
+            onClick={() => setSelectedDevotion("VISITA_IGLESIA")}
+          >
+            ⛪ VISITA IGLESIA
+          </button>
+          <button 
+            className={`${styles.switcherBtn} ${selectedDevotion === "STATIONS_OF_CROSS" ? styles.activeSwitcher : ""}`}
+            onClick={() => setSelectedDevotion("STATIONS_OF_CROSS")}
+          >
+            ✝️ STATIONS OF THE CROSS
+          </button>
+        </div>
+      )}
+
       {/* Top Horizontal Progress Indicator */}
       <div className="progress-track">
         <div className="progress-fill" style={{ width: `${scrollProgress}%` }} />
@@ -190,10 +211,14 @@ const VerticalFeed: React.FC = () => {
         />
       ))}
 
-      {/* General Devotions (Visita Iglesia Guide -> Stations) - Thursday and Friday Only */}
-      {(currentDay === "THURSDAY" || currentDay === "FRIDAY") && filteredGeneralPosts.map((post, index) => (
+      {/* General Devotions (Visita Iglesia Guide / Stations Guide -> Content) */}
+      {isDevotionAvailable && filteredGeneralPosts.map((post, index) => (
         <React.Fragment key={post.id}>
-          {index === 0 && <VisitaIglesiaCard />}
+          {index === 0 && (
+            selectedDevotion === "VISITA_IGLESIA" 
+              ? <VisitaIglesiaCard /> 
+              : <StationsGuideCard />
+          )}
           <ContentCard post={post} />
         </React.Fragment>
       ))}

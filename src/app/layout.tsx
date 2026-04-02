@@ -32,11 +32,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ServiceWorkerRegistration />
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>

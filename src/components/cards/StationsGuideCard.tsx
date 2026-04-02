@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./ContentCard.module.css";
 
-const VisitaIglesiaCard: React.FC = () => {
+const StationsGuideCard: React.FC = () => {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
@@ -17,8 +17,8 @@ const VisitaIglesiaCard: React.FC = () => {
   return (
     <section className={`${styles.card} shimmer`}>
       <Image 
-        src="/backgrounds/header.jpeg"
-        alt="Visita Iglesia Header"
+        src="/backgrounds/fridayheader.jpg"
+        alt="Stations of the Cross Header"
         fill
         priority
         className={styles.bgImage}
@@ -26,26 +26,26 @@ const VisitaIglesiaCard: React.FC = () => {
       />
       <div className={styles.overlay} />
       <div className={styles.content} style={{ textAlign: 'center', paddingTop: '6rem' }}>
-        <div className={styles.focusIcon} style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>⛪</div>
+        <div className={styles.focusIcon} style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✝️</div>
         
         <span className={styles.typeBadge} style={{ color: 'var(--accent-gold)', opacity: 0.6 }}>
-          Visita Iglesia Guide 2026
+          Lent & Holy Week Devotion
         </span>
         
         <h1 className={styles.reflectionTitle} style={{ fontSize: '2.5rem', marginBottom: '1.25rem' }}>
-          Visitation of 7 Churches
+          Stations of the Cross
         </h1>
         
         <p className={styles.reflectionBody} style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '2.5rem', fontStyle: 'italic', maxWidth: '300px', margin: '0 auto 2.5rem' }}>
-          An invitation to be closer to God and meditate on the great value of His ultimate sacrifice.
+          Follow the footsteps of Jesus from His condemnation to His burial in the tomb.
         </p>
 
         {/* ISO 9241 Scannable Guide Blocks */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '360px', margin: '0 auto' }}>
           {[
-            { icon: '📖', title: 'Prelude', desc: 'Opening prayers & blessing.' },
-            { icon: '⛪', title: 'The Journey', desc: '7 Church visits with reflection.' },
-            { icon: '🕊️', title: 'Closing', desc: 'Concluding prayers & praises.' }
+            { icon: '🙏', title: '14 Stations', desc: 'A complete journey of the Passion.' },
+            { icon: '📖', title: 'Scripture & Prayer', desc: 'Meditate on the Word at every stop.' },
+            { icon: '🕊️', title: 'Reflection', desc: 'Deepen your personal walk with Christ.' }
           ].map((item, i) => (
             <div key={i} className="glass" style={{ 
               padding: '1.25rem', 
@@ -72,36 +72,9 @@ const VisitaIglesiaCard: React.FC = () => {
             Tap the <span style={{ color: 'var(--accent-gold)' }}>▴</span> Up or <span style={{ color: 'var(--accent-gold)' }}>▾</span> Down buttons below
           </p>
           <p style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem', letterSpacing: '0.05em' }}>
-            TO BEGIN YOUR PILGRIMAGE
+            TO BEGIN THE STATIONS
           </p>
         </div>
-
-        {/* PWA Install Tip - Only show if not already installed/standalone */}
-        {!isStandalone && (
-          <div className="glass" style={{ 
-            marginTop: '2rem', 
-            padding: '1rem', 
-            borderRadius: '16px', 
-            border: '1px dashed var(--accent-gold)',
-            background: 'rgba(255, 202, 40, 0.05)',
-            width: '100%',
-            maxWidth: '340px',
-            margin: '2rem auto 0'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '1.2rem' }}>📲</span>
-              <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-gold)', letterSpacing: '0.05em' }}>
-                STAY CONNECTED OFFLINE
-              </h4>
-            </div>
-            <p style={{ fontSize: '0.75rem', opacity: 0.8, lineHeight: '1.4' }}>
-              Add to <strong>Home Screen</strong> to use this guide as an app, even in churches without signal.
-            </p>
-            <div style={{ marginTop: '0.75rem', fontSize: '0.7rem', opacity: 0.6, fontWeight: 600 }}>
-              TIP: Tap <span style={{ color: 'var(--accent-gold)' }}>Share</span> (iOS) or <span style={{ color: 'var(--accent-gold)' }}>Menu ⋮</span> (Android) and choose <strong>"Add to Home Screen"</strong>.
-            </div>
-          </div>
-        )}
 
         {/* Elegant Attribution Footer */}
         <div style={{ marginTop: 'auto', paddingTop: '3rem', fontSize: '0.6rem', opacity: 0.2, letterSpacing: '0.05em', fontWeight: 600 }}>
@@ -112,4 +85,4 @@ const VisitaIglesiaCard: React.FC = () => {
   );
 };
 
-export default VisitaIglesiaCard;
+export default StationsGuideCard;
