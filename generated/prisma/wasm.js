@@ -103,6 +103,7 @@ exports.Prisma.PostScalarFieldEnum = {
   prayerResponse: 'prayerResponse',
   introText: 'introText',
   outroText: 'outroText',
+  category: 'category',
   scheduledDay: 'scheduledDay',
   closingPrayer: 'closingPrayer',
   createdAt: 'createdAt',
@@ -162,22 +163,21 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "file:./db.sqlite"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String // REFLECT, SCRIPTURE, STATION\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  scheduledDay   String? // THURSDAY, FRIDAY, SATURDAY\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n}\n",
-  "inlineSchemaHash": "c050c248db7f8e21d6a4cdae213d970df895b93b7a7df7f3d441750b6132e5da",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./db.sqlite\"\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String // REFLECT, SCRIPTURE, STATION\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  category       String   @default(\"GENERAL\") // VISITA_IGLESIA, STATIONS_OF_CROSS, GENERAL\n  scheduledDay   String? // THURSDAY, FRIDAY, SATURDAY\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n  @@index([category])\n}\n",
+  "inlineSchemaHash": "82672d6c8d2ae758f3b53174a70c91e51e3ba0198ba2e10f912c41dc3bca8d68",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scriptureRef\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stationNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prayerText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"introText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"outroText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scheduledDay\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"closingPrayer\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scriptureRef\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stationNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prayerText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"introText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"outroText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scheduledDay\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"closingPrayer\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
@@ -190,9 +190,7 @@ config.engineWasm = {
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {

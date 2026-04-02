@@ -131,6 +131,7 @@ exports.Prisma.PostScalarFieldEnum = {
   prayerResponse: 'prayerResponse',
   introText: 'introText',
   outroText: 'outroText',
+  category: 'category',
   scheduledDay: 'scheduledDay',
   closingPrayer: 'closingPrayer',
   createdAt: 'createdAt',

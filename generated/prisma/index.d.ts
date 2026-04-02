@@ -894,6 +894,7 @@ export namespace Prisma {
     prayerResponse: string | null
     introText: string | null
     outroText: string | null
+    category: string | null
     scheduledDay: string | null
     closingPrayer: boolean | null
     createdAt: Date | null
@@ -913,6 +914,7 @@ export namespace Prisma {
     prayerResponse: string | null
     introText: string | null
     outroText: string | null
+    category: string | null
     scheduledDay: string | null
     closingPrayer: boolean | null
     createdAt: Date | null
@@ -932,6 +934,7 @@ export namespace Prisma {
     prayerResponse: number
     introText: number
     outroText: number
+    category: number
     scheduledDay: number
     closingPrayer: number
     createdAt: number
@@ -961,6 +964,7 @@ export namespace Prisma {
     prayerResponse?: true
     introText?: true
     outroText?: true
+    category?: true
     scheduledDay?: true
     closingPrayer?: true
     createdAt?: true
@@ -980,6 +984,7 @@ export namespace Prisma {
     prayerResponse?: true
     introText?: true
     outroText?: true
+    category?: true
     scheduledDay?: true
     closingPrayer?: true
     createdAt?: true
@@ -999,6 +1004,7 @@ export namespace Prisma {
     prayerResponse?: true
     introText?: true
     outroText?: true
+    category?: true
     scheduledDay?: true
     closingPrayer?: true
     createdAt?: true
@@ -1105,6 +1111,7 @@ export namespace Prisma {
     prayerResponse: string | null
     introText: string | null
     outroText: string | null
+    category: string
     scheduledDay: string | null
     closingPrayer: boolean
     createdAt: Date
@@ -1143,6 +1150,7 @@ export namespace Prisma {
     prayerResponse?: boolean
     introText?: boolean
     outroText?: boolean
+    category?: boolean
     scheduledDay?: boolean
     closingPrayer?: boolean
     createdAt?: boolean
@@ -1162,6 +1170,7 @@ export namespace Prisma {
     prayerResponse?: boolean
     introText?: boolean
     outroText?: boolean
+    category?: boolean
     scheduledDay?: boolean
     closingPrayer?: boolean
     createdAt?: boolean
@@ -1181,6 +1190,7 @@ export namespace Prisma {
     prayerResponse?: boolean
     introText?: boolean
     outroText?: boolean
+    category?: boolean
     scheduledDay?: boolean
     closingPrayer?: boolean
     createdAt?: boolean
@@ -1200,13 +1210,14 @@ export namespace Prisma {
     prayerResponse?: boolean
     introText?: boolean
     outroText?: boolean
+    category?: boolean
     scheduledDay?: boolean
     closingPrayer?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "title" | "content" | "author" | "scriptureRef" | "imageUrl" | "stationNumber" | "prayerText" | "prayerResponse" | "introText" | "outroText" | "scheduledDay" | "closingPrayer" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "title" | "content" | "author" | "scriptureRef" | "imageUrl" | "stationNumber" | "prayerText" | "prayerResponse" | "introText" | "outroText" | "category" | "scheduledDay" | "closingPrayer" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
@@ -1224,6 +1235,7 @@ export namespace Prisma {
       prayerResponse: string | null
       introText: string | null
       outroText: string | null
+      category: string
       scheduledDay: string | null
       closingPrayer: boolean
       createdAt: Date
@@ -1663,6 +1675,7 @@ export namespace Prisma {
     readonly prayerResponse: FieldRef<"Post", 'String'>
     readonly introText: FieldRef<"Post", 'String'>
     readonly outroText: FieldRef<"Post", 'String'>
+    readonly category: FieldRef<"Post", 'String'>
     readonly scheduledDay: FieldRef<"Post", 'String'>
     readonly closingPrayer: FieldRef<"Post", 'Boolean'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
@@ -2055,6 +2068,7 @@ export namespace Prisma {
     prayerResponse: 'prayerResponse',
     introText: 'introText',
     outroText: 'outroText',
+    category: 'category',
     scheduledDay: 'scheduledDay',
     closingPrayer: 'closingPrayer',
     createdAt: 'createdAt',
@@ -2139,6 +2153,7 @@ export namespace Prisma {
     prayerResponse?: StringNullableFilter<"Post"> | string | null
     introText?: StringNullableFilter<"Post"> | string | null
     outroText?: StringNullableFilter<"Post"> | string | null
+    category?: StringFilter<"Post"> | string
     scheduledDay?: StringNullableFilter<"Post"> | string | null
     closingPrayer?: BoolFilter<"Post"> | boolean
     createdAt?: DateTimeFilter<"Post"> | Date | string
@@ -2158,6 +2173,7 @@ export namespace Prisma {
     prayerResponse?: SortOrderInput | SortOrder
     introText?: SortOrderInput | SortOrder
     outroText?: SortOrderInput | SortOrder
+    category?: SortOrder
     scheduledDay?: SortOrderInput | SortOrder
     closingPrayer?: SortOrder
     createdAt?: SortOrder
@@ -2180,6 +2196,7 @@ export namespace Prisma {
     prayerResponse?: StringNullableFilter<"Post"> | string | null
     introText?: StringNullableFilter<"Post"> | string | null
     outroText?: StringNullableFilter<"Post"> | string | null
+    category?: StringFilter<"Post"> | string
     scheduledDay?: StringNullableFilter<"Post"> | string | null
     closingPrayer?: BoolFilter<"Post"> | boolean
     createdAt?: DateTimeFilter<"Post"> | Date | string
@@ -2199,6 +2216,7 @@ export namespace Prisma {
     prayerResponse?: SortOrderInput | SortOrder
     introText?: SortOrderInput | SortOrder
     outroText?: SortOrderInput | SortOrder
+    category?: SortOrder
     scheduledDay?: SortOrderInput | SortOrder
     closingPrayer?: SortOrder
     createdAt?: SortOrder
@@ -2226,6 +2244,7 @@ export namespace Prisma {
     prayerResponse?: StringNullableWithAggregatesFilter<"Post"> | string | null
     introText?: StringNullableWithAggregatesFilter<"Post"> | string | null
     outroText?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    category?: StringWithAggregatesFilter<"Post"> | string
     scheduledDay?: StringNullableWithAggregatesFilter<"Post"> | string | null
     closingPrayer?: BoolWithAggregatesFilter<"Post"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
@@ -2245,6 +2264,7 @@ export namespace Prisma {
     prayerResponse?: string | null
     introText?: string | null
     outroText?: string | null
+    category?: string
     scheduledDay?: string | null
     closingPrayer?: boolean
     createdAt?: Date | string
@@ -2264,6 +2284,7 @@ export namespace Prisma {
     prayerResponse?: string | null
     introText?: string | null
     outroText?: string | null
+    category?: string
     scheduledDay?: string | null
     closingPrayer?: boolean
     createdAt?: Date | string
@@ -2283,6 +2304,7 @@ export namespace Prisma {
     prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
     introText?: NullableStringFieldUpdateOperationsInput | string | null
     outroText?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
     scheduledDay?: NullableStringFieldUpdateOperationsInput | string | null
     closingPrayer?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2302,6 +2324,7 @@ export namespace Prisma {
     prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
     introText?: NullableStringFieldUpdateOperationsInput | string | null
     outroText?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
     scheduledDay?: NullableStringFieldUpdateOperationsInput | string | null
     closingPrayer?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2321,6 +2344,7 @@ export namespace Prisma {
     prayerResponse?: string | null
     introText?: string | null
     outroText?: string | null
+    category?: string
     scheduledDay?: string | null
     closingPrayer?: boolean
     createdAt?: Date | string
@@ -2340,6 +2364,7 @@ export namespace Prisma {
     prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
     introText?: NullableStringFieldUpdateOperationsInput | string | null
     outroText?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
     scheduledDay?: NullableStringFieldUpdateOperationsInput | string | null
     closingPrayer?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2359,6 +2384,7 @@ export namespace Prisma {
     prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
     introText?: NullableStringFieldUpdateOperationsInput | string | null
     outroText?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: StringFieldUpdateOperationsInput | string
     scheduledDay?: NullableStringFieldUpdateOperationsInput | string | null
     closingPrayer?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2438,6 +2464,7 @@ export namespace Prisma {
     prayerResponse?: SortOrder
     introText?: SortOrder
     outroText?: SortOrder
+    category?: SortOrder
     scheduledDay?: SortOrder
     closingPrayer?: SortOrder
     createdAt?: SortOrder
@@ -2461,6 +2488,7 @@ export namespace Prisma {
     prayerResponse?: SortOrder
     introText?: SortOrder
     outroText?: SortOrder
+    category?: SortOrder
     scheduledDay?: SortOrder
     closingPrayer?: SortOrder
     createdAt?: SortOrder
@@ -2480,6 +2508,7 @@ export namespace Prisma {
     prayerResponse?: SortOrder
     introText?: SortOrder
     outroText?: SortOrder
+    category?: SortOrder
     scheduledDay?: SortOrder
     closingPrayer?: SortOrder
     createdAt?: SortOrder
