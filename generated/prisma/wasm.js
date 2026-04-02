@@ -163,6 +163,7 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -171,8 +172,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./db.sqlite\"\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String // REFLECT, SCRIPTURE, STATION\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  category       String   @default(\"GENERAL\") // VISITA_IGLESIA, STATIONS_OF_CROSS, GENERAL\n  scheduledDay   String? // THURSDAY, FRIDAY, SATURDAY\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n  @@index([category])\n}\n",
-  "inlineSchemaHash": "82672d6c8d2ae758f3b53174a70c91e51e3ba0198ba2e10f912c41dc3bca8d68",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./db.sqlite\"\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  category       String   @default(\"GENERAL\")\n  scheduledDay   String?\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n  @@index([category])\n}\n",
+  "inlineSchemaHash": "0821ca72851573a2f9183243ec0a885660aa41559d65ce220d2fc9513963ed9e",
   "copyEngine": true
 }
 config.dirname = '/'
