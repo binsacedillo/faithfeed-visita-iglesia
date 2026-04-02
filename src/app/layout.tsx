@@ -35,6 +35,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && typeof browser === 'undefined') {
+                window.browser = window.chrome || {};
+              }
+            `,
+          }}
+        />
       </head>
       <body suppressHydrationWarning>
         <ServiceWorkerRegistration />
