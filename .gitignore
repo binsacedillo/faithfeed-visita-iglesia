@@ -9,9 +9,8 @@
 /coverage
 
 # database
-# /prisma/db.sqlite (Now tracking for Vercel deployment)
+/prisma/db.sqlite
 /prisma/db.sqlite-journal
-# db.sqlite
 
 # next.js
 /.next/
@@ -44,3 +43,7 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# prisma generated binaries and temps
+**/query_engine-windows.dll.node.tmp*
+/generated/prisma/query_engine-windows.dll.node
