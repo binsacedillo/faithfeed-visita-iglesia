@@ -44,6 +44,9 @@ yarn-error.log*
 # idea files
 .idea
 
+# local scratch / temporary scripts
+/tmp/
+
 # prisma generated binaries and temps
 **/query_engine-windows.dll.node.tmp*
 /generated/prisma/query_engine-windows.dll.node

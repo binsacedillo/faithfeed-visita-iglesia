@@ -1,48 +1,82 @@
-# ⛪ Faith Feed: Visita Iglesia 2026
+# Faith Feed: Visita Iglesia 2026
 
-**Faith Feed** is a high-fidelity, meditative PWA designed for the Holy Week 2026 pilgrimage. It provides a structured, distraction-free environment for the traditional **7-Church Visita Iglesia** and **Triduum** devotions.
+Faith Feed is a meditative Next.js PWA for Catholic devotional practice. It started as a Holy Week companion and now supports seasonal presentation beyond Easter.
 
----
+## Key Features
 
-## ✨ Key Features
+- 7-Church Visita Iglesia devotional flow with station-based reflections.
+- St. Alphonsus Stations of the Cross content with scripture, prayers, and guided consideration.
+- Date-aware liturgy cards for Holy Thursday, Good Friday, Holy Saturday, Easter, Easter Season, and Ordinary Time presentation.
+- PWA support (installable, offline-capable shell) via Serwist service worker.
+- Season-aware visual themes, including Easter and Ordinary Time palettes.
+- Resilience improvements for deployment: no-store API fetch behavior and feed fallback cards when API data is temporarily unavailable.
 
-- **🙏 7-Church Pilgrimage**: Curated liturgical content for each station, including themes, verbatim Gospel readings, and reflections.
-- **📜 Full Traditional Prayers**: Immediate access to the *Our Father*, *Hail Mary*, and *Glory Be* at every station for easy recitation.
-- **🕊️ Triduum Focus**: Date-aware scripture cards for Holy Thursday, Good Friday, and Holy Saturday.
-- **📱 PWA & Offline Support**: Designed to work as a mobile app, keeping your devotions accessible even with poor signal in busy cathedrals.
-- **🎨 ISO-Compliant UX**: An elegant, one-thumb-accessible interface with a glassmorphic bottom-center navigation dock.
+## Season Logic (Current)
 
----
+- Holy Week detection: Thursday, Friday, Saturday before Easter Sunday.
+- Easter Sunday: dedicated Easter view.
+- Easter Season: Easter Monday through Pentecost.
+- Ordinary Time (current implementation): starts the day after Pentecost through year end.
 
-## 🖼️ Personalizing Your Backgrounds
+## Background Personalization
 
-The app is built to be a deeply personal experience. You can add your own sacred images by following these steps:
+Add your own sacred images in `public/backgrounds/`.
 
-1. Place your `.jpg` or `.jpeg` files in `public/backgrounds/`.
-2. Name them as follows:
-   - `header.jpeg` (Welcome Landing Guide)
-   - `intro.jpg` (Opening Prayer)
-   - `station1.jpg` to `station7.jpg` (The 7 Churches)
-   - `outro.jpg` (Closing Prayer)
+Suggested file names:
+- `header.jpeg` for the opening guide.
+- `intro.jpg` for general intro cards.
+- `station1.jpg` to `station7.jpg` for Visita Iglesia stations.
+- `outro.jpg` for closing/ending cards.
 
----
+Additional seasonal assets currently used by the UI include:
+- `easterheader.jpg`, `easter.jpg`
+- `headerthursday.jpeg`, `fridayheader.jpg`, `saturdayheader.jpg`
+- `thursday.jpg`, `friday.jpg`, `saturday.jpg`
 
-## 🛠️ Technology Stack
+## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (T3 Stack)
-- **Database**: [SQLite](https://www.sqlite.org/) with [Prisma](https://www.prisma.io/)
-- **API**: [tRPC](https://trpc.io/)
-- **PWA**: [Serwist](https://serwist.js.org/)
-- **Styling**: Vanilla CSS with Glassmorphism and modern design tokens.
+- Next.js 15 (App Router)
+- React 19
+- tRPC 11
+- Prisma ORM
+- SQLite (current production setup)
+- Serwist (PWA service worker)
+- TypeScript + Vanilla CSS modules
 
----
+## Local Development
 
-## 👨‍💻 Maker
+1. Install dependencies:
+```bash
+npm install
+```
 
-Designed and built for Holy Week 2026 by **Vince Gio Acedillo**.
+2. Generate Prisma client and seed data if needed:
+```bash
+npm run db:push
+npx prisma db seed
+```
 
----
+3. Run dev server:
+```bash
+npm run dev
+```
 
-## 📜 License
+4. Validate types:
+```bash
+npm run typecheck
+```
 
-© 2026 Vince Gio Acedillo. All Rights Reserved.
+## Deployment Notes
+
+- API route is configured for dynamic Node.js runtime behavior.
+- Client tRPC fetch is configured with `cache: no-store` to reduce stale responses.
+- UI includes fallback devotional cards and retry behavior if API query fails.
+- For stronger production reliability at scale, consider moving from file-based SQLite to a managed database.
+
+## Maker
+
+Designed and built by Vince Gio Acedillo.
+
+## License
+
+Copyright 2026 Vince Gio Acedillo. All rights reserved.
