@@ -8,14 +8,69 @@ import VisitaIglesiaCard from "../cards/VisitaIglesiaCard";
 import StationsGuideCard from "../cards/StationsGuideCard";
 import styles from "./VerticalFeed.module.css";
 
+const FALLBACK_POSTS = [
+  {
+    id: "fallback-opening-prayer",
+    type: "REFLECT",
+    title: "Opening Prayer",
+    content:
+      "Lord Jesus, stay with me in every season. Strengthen my faith, renew my hope, and teach me to love as You love.",
+    author: "Faith Feed",
+    scriptureRef: null,
+    imageUrl: "/backgrounds/guide.jpg",
+    category: "GENERAL",
+    scheduledDay: null,
+    stationNumber: null,
+    prayerText: null,
+    prayerResponse: null,
+    introText: null,
+    outroText: null,
+  },
+  {
+    id: "fallback-daily-gospel",
+    type: "SCRIPTURE",
+    title: "Daily Gospel Reflection",
+    content:
+      "Remain in me, as I remain in you. Whoever remains in me and I in him will bear much fruit.",
+    author: "John 15:4-5",
+    scriptureRef: "John 15:4-5",
+    imageUrl: "/backgrounds/intro.jpg",
+    category: "GENERAL",
+    scheduledDay: null,
+    stationNumber: null,
+    prayerText: null,
+    prayerResponse: null,
+    introText: null,
+    outroText: null,
+  },
+  {
+    id: "fallback-closing-prayer",
+    type: "REFLECT",
+    title: "Closing Prayer",
+    content:
+      "Thank You, Lord, for meeting me here. Let Your Word guide my ordinary days, and keep my heart close to Yours.",
+    author: "Faith Feed",
+    scriptureRef: null,
+    imageUrl: "/backgrounds/outro.jpg",
+    category: "GENERAL",
+    scheduledDay: null,
+    stationNumber: null,
+    prayerText: null,
+    prayerResponse: null,
+    introText: null,
+    outroText: null,
+  },
+];
+
 const VerticalFeed: React.FC = () => {
-  const { data: posts, isLoading } = api.post.getAll.useQuery(undefined, {
+  const { data: posts, isLoading, isError, refetch } = api.post.getAll.useQuery(undefined, {
     staleTime: 1000 * 60 * 5, // Keep data fresh for 5 minutes
     refetchOnWindowFocus: false, // Don't refetch when focusing the browser
-    retry: 1, // Only retry once to avoid query loop on persistent errors
+    retry: 2,
   });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentDay, setCurrentDay] = useState<string | null>(null);
+  const [currentSeason, setCurrentSeason] = useState<"HOLY_WEEK" | "EASTER_SEASON" | "ORDINARY_TIME" | null>(null);
   const [selectedDevotion, setSelectedDevotion] = useState<"VISITA_IGLESIA" | "STATIONS_OF_CROSS">("VISITA_IGLESIA");
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,17 +108,50 @@ const VerticalFeed: React.FC = () => {
     const wed = new Date(thu); wed.setDate(thu.getDate() - 1);
     const fri = new Date(easter); fri.setDate(easter.getDate() - 2);
     const sat = new Date(easter); sat.setDate(easter.getDate() - 1);
+    const easterMonday = new Date(easter); easterMonday.setDate(easter.getDate() + 1);
+    const pentecost = new Date(easter); pentecost.setDate(easter.getDate() + 49);
+    const ordinaryTimeStart = new Date(pentecost); ordinaryTimeStart.setDate(pentecost.getDate() + 1);
 
     const isSameDay = (d1: Date, time: number) => {
       const d1M = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()).getTime();
       return d1M === time;
     };
 
-    if (isSameDay(thu, todayMidnight) || isSameDay(wed, todayMidnight)) setCurrentDay("THURSDAY");
-    else if (isSameDay(fri, todayMidnight)) setCurrentDay("FRIDAY");
-    else if (isSameDay(sat, todayMidnight)) setCurrentDay("SATURDAY");
-    else if (isSameDay(easter, todayMidnight)) setCurrentDay("EASTER");
-    else setCurrentDay(null);
+    const isBetweenInclusive = (date: Date, start: Date, end: Date) => {
+      const dateM = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+      const startM = new Date(start.getFullYear(), start.getMonth(), start.getDate()).getTime();
+      const endM = new Date(end.getFullYear(), end.getMonth(), end.getDate()).getTime();
+      return dateM >= startM && dateM <= endM;
+    };
+
+    if (isSameDay(thu, todayMidnight) || isSameDay(wed, todayMidnight)) {
+      setCurrentDay("THURSDAY");
+      setCurrentSeason("HOLY_WEEK");
+    }
+    else if (isSameDay(fri, todayMidnight)) {
+      setCurrentDay("FRIDAY");
+      setCurrentSeason("HOLY_WEEK");
+    }
+    else if (isSameDay(sat, todayMidnight)) {
+      setCurrentDay("SATURDAY");
+      setCurrentSeason("HOLY_WEEK");
+    }
+    else if (isSameDay(easter, todayMidnight)) {
+      setCurrentDay("EASTER");
+      setCurrentSeason("EASTER_SEASON");
+    }
+    else if (isBetweenInclusive(today, easterMonday, pentecost)) {
+      setCurrentDay("EASTER_SEASON");
+      setCurrentSeason("EASTER_SEASON");
+    }
+    else if (isBetweenInclusive(today, ordinaryTimeStart, new Date(currentYear, 11, 31))) {
+      setCurrentDay("ORDINARY_TIME");
+      setCurrentSeason("ORDINARY_TIME");
+    }
+    else {
+      setCurrentDay(null);
+      setCurrentSeason(null);
+    }
   }, []);
 
   const scrollRef = useRef<number | null>(null);
@@ -107,17 +195,27 @@ const VerticalFeed: React.FC = () => {
     );
   }
 
-  const todayScriptures = posts?.filter(p => p.scheduledDay === currentDay && currentDay !== null) ?? [];
-  const filteredGeneralPosts = posts?.filter(p => !p.scheduledDay && (p.category === selectedDevotion || p.category === "GENERAL")) ?? [];
+  const safePosts = posts && posts.length > 0 ? posts : FALLBACK_POSTS;
+  const todayScriptures = safePosts.filter(p => p.scheduledDay === currentDay && currentDay !== null);
+  const filteredGeneralPosts = safePosts.filter(p => !p.scheduledDay && (p.category === selectedDevotion || p.category === "GENERAL"));
+  const ordinaryPosts = safePosts.filter(p => !p.scheduledDay && p.category === "GENERAL");
   
   const isDevotionAvailable = currentDay === "THURSDAY" || currentDay === "FRIDAY";
+  const shouldUseOrdinaryTheme = currentSeason === "ORDINARY_TIME";
+  const hasSeasonHeader = todayScriptures.length > 0 || currentDay === "EASTER_SEASON" || currentDay === "ORDINARY_TIME";
+  const displayedGeneralPosts = isDevotionAvailable ? filteredGeneralPosts : ordinaryPosts;
+  const theme = currentDay === "EASTER" || currentDay === "EASTER_SEASON"
+    ? "easter"
+    : shouldUseOrdinaryTheme
+      ? "ordinary"
+      : "default";
 
   return (
     <main 
       className="feed-container" 
       onScroll={handleScroll} 
       ref={containerRef}
-      data-theme={currentDay === "EASTER" ? "easter" : "default"}
+      data-theme={theme}
     >
       {/* Devotion Switcher */}
       {isDevotionAvailable && (
@@ -142,6 +240,38 @@ const VerticalFeed: React.FC = () => {
         <div className="progress-fill" style={{ width: `${scrollProgress}%` }} />
       </div>
 
+      {isError && (
+        <div className="glass" style={{
+          position: "fixed",
+          top: "1rem",
+          right: "1rem",
+          zIndex: 2000,
+          borderRadius: "16px",
+          padding: "0.75rem 1rem",
+          maxWidth: "280px",
+          background: "rgba(0, 0, 0, 0.45)",
+        }}>
+          <p style={{ fontSize: "0.8rem", lineHeight: 1.4, marginBottom: "0.5rem" }}>
+            Live feed is reconnecting. Showing a fallback devotion.
+          </p>
+          <button
+            onClick={() => void refetch()}
+            style={{
+              border: "1px solid var(--accent-gold)",
+              background: "transparent",
+              color: "var(--accent-gold)",
+              borderRadius: "999px",
+              padding: "0.35rem 0.8rem",
+              fontWeight: 700,
+              fontSize: "0.75rem",
+              cursor: "pointer",
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
       {/* Floating Bottom Center Navigation Controls */}
       <div className={styles.navContainer}>
         <button 
@@ -163,14 +293,15 @@ const VerticalFeed: React.FC = () => {
       </div>
 
       {/* Section Header: Today's Word (Daily Liturgy Intro) */}
-      {todayScriptures.length > 0 && (
+      {hasSeasonHeader && (
         <section className={styles.sectionHeaderCard}>
           <Image 
             src={
               currentDay === "THURSDAY" ? "/backgrounds/headerthursday.jpeg" : 
               currentDay === "FRIDAY" ? "/backgrounds/fridayheader.jpg" :
               currentDay === "SATURDAY" ? "/backgrounds/saturdayheader.jpg" :
-              currentDay === "EASTER" ? "/backgrounds/easterheader.jpg" : 
+              currentDay === "EASTER" || currentDay === "EASTER_SEASON" ? "/backgrounds/easterheader.jpg" :
+              currentDay === "ORDINARY_TIME" ? "/backgrounds/header.jpeg" :
               "/backgrounds/header.jpeg"
             }
             alt="Liturgy Header"
@@ -187,14 +318,20 @@ const VerticalFeed: React.FC = () => {
               {currentDay === "FRIDAY" && "✝️"}
               {currentDay === "SATURDAY" && "🕊️"}
               {currentDay === "EASTER" && "☀️"}
+              {currentDay === "EASTER_SEASON" && "🌅"}
+              {currentDay === "ORDINARY_TIME" && "🌿"}
             </div>
             <span className={styles.typeBadge} style={{ color: 'var(--accent-gold)', letterSpacing: '0.3em' }}>
-              {currentDay} LITURGY
+              {currentDay === "ORDINARY_TIME" ? "ORDINARY TIME" : currentDay === "EASTER_SEASON" ? "EASTER SEASON" : `${currentDay} LITURGY`}
             </span>
             <h1 style={{ fontSize: '2.75rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>Today's Word</h1>
             <div style={{ height: '2px', background: 'var(--accent-gold)', width: '60px', margin: '0 auto 1.5rem', opacity: 0.6 }} />
             <p style={{ opacity: 0.7, fontSize: '0.9rem', fontStyle: 'italic', letterSpacing: '0.05em' }}>
-              Swipe down to begin the reflections
+              {currentDay === "ORDINARY_TIME"
+                ? "Walk in daily discipleship and reflect with the Gospel"
+                : currentDay === "EASTER_SEASON"
+                  ? "Continue in resurrection joy through the weeks after Easter"
+                  : "Swipe down to begin the reflections"}
             </p>
           </div>
         </section>
@@ -209,16 +346,17 @@ const VerticalFeed: React.FC = () => {
             currentDay === "THURSDAY" ? "/backgrounds/thursday.jpg" :
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" : 
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" : 
-            currentDay === "EASTER" ? "/backgrounds/easter.jpg" :
+            currentDay === "EASTER" || currentDay === "EASTER_SEASON" ? "/backgrounds/easter.jpg" :
+            currentDay === "ORDINARY_TIME" ? "/backgrounds/intro.jpg" :
             undefined
           }
         />
       ))}
 
       {/* General Devotions (Visita Iglesia Guide / Stations Guide -> Content) */}
-      {isDevotionAvailable && filteredGeneralPosts.map((post, index) => (
+      {displayedGeneralPosts.map((post, index) => (
         <React.Fragment key={post.id}>
-          {index === 0 && (
+          {index === 0 && isDevotionAvailable && (
             selectedDevotion === "VISITA_IGLESIA" 
               ? <VisitaIglesiaCard /> 
               : <StationsGuideCard />
@@ -233,7 +371,9 @@ const VerticalFeed: React.FC = () => {
           src={
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" :
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" :
-            currentDay === "EASTER" ? "/backgrounds/outro.jpg" : "/backgrounds/outro.jpg"
+            currentDay === "EASTER" || currentDay === "EASTER_SEASON" ? "/backgrounds/outro.jpg" :
+            currentDay === "ORDINARY_TIME" ? "/backgrounds/header.jpeg" :
+            "/backgrounds/outro.jpg"
           }
           alt="Conclusion"
           fill
@@ -260,7 +400,9 @@ const VerticalFeed: React.FC = () => {
             marginTop: '2rem',
             color: 'var(--text-primary)'
           }}>
-            A {new Date().getFullYear()} Holy Week Offering by Vince Gio Acedillo
+            {currentDay === "ORDINARY_TIME"
+              ? `A ${new Date().getFullYear()} Daily Faith Offering by Vince Gio Acedillo`
+              : `A ${new Date().getFullYear()} Holy Week Offering by Vince Gio Acedillo`}
             <div style={{ 
               opacity: 1, 
               marginTop: '1.25rem', 
@@ -269,7 +411,9 @@ const VerticalFeed: React.FC = () => {
               fontSize: '1rem',
               letterSpacing: '0.05em'
             }}>
-              See you in next year's Holy Week
+              {currentDay === "ORDINARY_TIME"
+                ? "Keep walking with Christ in Ordinary Time"
+                : "See you in next year's Holy Week"}
             </div>
           </div>
         </div>
