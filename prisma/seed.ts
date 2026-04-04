@@ -54,6 +54,39 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
     }
   ];
 
+  const easterSeasonEntries = [
+    {
+      type: "SCRIPTURE",
+      scheduledDay: "EASTER_SEASON",
+      title: "Easter Season Gospel",
+      scriptureRef: "John 14:6",
+      content: "Jesus said to him, 'I am the way and the truth and the life. No one comes to the Father except through me.'",
+      author: "Let the Risen Christ lead your path this week.",
+      prayerText: "Lord Jesus, You are the way when I feel lost, the truth when I am confused, and the life when I am tired. Keep my heart close to You in this Easter Season.",
+      prayerResponse: "Risen Lord, renew my hope and teach me to walk in Your light each day. Amen.",
+      imageUrl: "/backgrounds/easter.jpg",
+    },
+    {
+      type: "SCRIPTURE",
+      scheduledDay: "EASTER_SEASON",
+      title: "Easter Season Promise",
+      scriptureRef: "Matthew 28:20",
+      content: "And behold, I am with you always, until the end of the age.",
+      author: "He is with us in ordinary routines and hidden struggles.",
+      prayerText: "Risen Jesus, stay with me in my studies, work, family life, and quiet moments. Let me never forget Your faithful presence.",
+      prayerResponse: "Lord, make my life a witness of Your resurrection peace. Amen.",
+      imageUrl: "/backgrounds/easter.jpg",
+    },
+    {
+      type: "REFLECT",
+      scheduledDay: "EASTER_SEASON",
+      title: "Prayer for the Fifty Days",
+      content: "Risen Christ, breathe new life into what is weary in me. Heal what is wounded, strengthen what is weak, and kindle joy where there is fear. May Your victory over death shape my words, choices, and love for others. Amen.",
+      author: "Easter Season Prayer",
+      imageUrl: "/backgrounds/easter.jpg",
+    },
+  ];
+
   const stationsOfCross = [
     {
       stationNumber: 1,
@@ -280,6 +313,7 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
       imageUrl: "/backgrounds/guide.jpg",
     },
     ...triduumScriptures.map(s => ({ ...s, category: "GENERAL" })),
+    ...easterSeasonEntries.map(s => ({ ...s, category: "GENERAL" })),
     ...churches.map((c) => ({
       type: "STATION",
       ...c,
@@ -291,9 +325,9 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
     {
       type: "REFLECT",
       category: "GENERAL",
-      title: "Prayer to Jesus Christ Crucified",
-      content: "My good and dear Jesus, I kneel before You, asking You most earnestly to engrave upon my heart a deep and lively faith, hope, and charity, with true repentance for my sins, and a firm resolve to make amends. As I reflect upon Your five wounds, and dwell upon them with deep compassion and grief, I recall, good Jesus, the words the Prophet David spoke long ago concerning Yourself: “They pierced My hands and My feet; they have numbered all My bones.”",
-      author: "Universal Prayer",
+      title: "Easter Prayer of Hope",
+      content: "Risen Jesus, You have conquered sin and death. Let Your light rise in my heart, Your peace settle my fears, and Your joy shape my words and choices. Teach me to live as a witness of resurrection hope, and to carry that hope into every ordinary day.",
+      author: "Easter Season Prayer",
       imageUrl: "/backgrounds/outro.jpg",
     },
   ];
