@@ -18,9 +18,10 @@ interface ContentCardProps {
     introText?: string | null;
     outroText?: string | null;
   };
+  customBackground?: string;
 }
 
-const ContentCard: React.FC<ContentCardProps> = ({ post }) => {
+const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
   const [showScripture, setShowScripture] = useState(false);
@@ -49,14 +50,14 @@ const ContentCard: React.FC<ContentCardProps> = ({ post }) => {
 
         {/* Liturgy Daily Entries */}
         {!post.stationNumber && post.type === "SCRIPTURE" && (
-          <>
-            <span className={styles.typeBadge}>Liturgy | {post.title}</span>
-            <h3 className={styles.goldHeader}>{post.scriptureRef}</h3>
-            <p className={`${styles.scriptureTextVerbatim} serif`}>“{post.content}”</p>
+          <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+            <span className={styles.typeBadge}>{post.title}</span>
+            <h3 className={styles.goldHeader} style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>{post.scriptureRef}</h3>
+            <p className={`${styles.scriptureTextVerbatim}`}>{post.content}</p>
             <div className={styles.salutationBox}>
-              <p className={styles.bodyText} style={{ fontStyle: 'italic', opacity: 0.8 }}>{post.author}</p>
+              <p className={styles.bodyText} style={{ fontStyle: 'italic' }}>{post.author}</p>
             </div>
-          </>
+          </div>
         )}
 
         {/* Regular Reflections */}
@@ -134,11 +135,14 @@ const ContentCard: React.FC<ContentCardProps> = ({ post }) => {
     );
   };
 
+  const cardStyle = (customBackground || post.imageUrl) ? {
+    backgroundImage: `url(${customBackground ?? post.imageUrl})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  } : {};
+
   return (
-    <section 
-      className={styles.card}
-      style={post.imageUrl ? { backgroundImage: `url(${post.imageUrl})` } : {}}
-    >
+    <section className={`${styles.card} ${post.stationNumber ? styles.stationCard : ''}`} style={cardStyle}>
       <div className={styles.overlay} />
       {renderContent()}
     </section>

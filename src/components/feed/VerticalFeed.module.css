@@ -29,11 +29,7 @@
 .headerOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(13, 2, 22, 0.4) 0%,
-    rgba(13, 2, 22, 0.8) 100%
-  );
+  background: var(--bg-overlay);
   z-index: 1;
 }
 
@@ -74,9 +70,9 @@
   z-index: 1001;
   padding: 0.5rem 1rem;
   border-radius: 40px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-subtle);
 }
 
 .navBtn {
@@ -87,7 +83,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  color: white;
+  color: var(--button-text);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -104,7 +100,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border: 1px solid var(--accent-gold);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
   box-shadow: 0 0 25px rgba(255, 202, 40, 0.15);
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -126,4 +122,26 @@
   0% { box-shadow: 0 0 20px rgba(255, 202, 40, 0.1); }
   50% { box-shadow: 0 0 40px rgba(255, 202, 40, 0.25); }
   100% { box-shadow: 0 0 20px rgba(255, 202, 40, 0.1); }
+}
+
+/* Easter Overrides for Feed Controls */
+:global([data-theme="easter"]) .navBtn {
+  color: #1a1a1a !important;
+}
+
+:global([data-theme="easter"]) .navContainer {
+  background: rgba(161, 129, 26, 0.08) !important;
+  border-color: rgba(161, 129, 26, 0.2) !important;
+}
+
+:global([data-theme="easter"]) .finaleBtn {
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: #a1811a !important;
+  border-color: #a1811a !important;
+}
+
+:global([data-theme="easter"]) .endCard h3,
+:global([data-theme="easter"]) .endCard div,
+:global([data-theme="easter"]) .endCard span {
+  color: #1a1a1a !important;
 }

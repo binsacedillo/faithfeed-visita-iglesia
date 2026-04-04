@@ -13,6 +13,13 @@
   --font-main: 'Outfit', sans-serif;
   --font-serif: 'Fraunces', serif;
   
+  /* Themeable Overlays & Gradients */
+  --bg-overlay: linear-gradient(to bottom, rgba(13, 2, 22, 0.4) 0%, rgba(13, 2, 22, 0.8) 100%);
+  --title-gradient: linear-gradient(to right, #fff, var(--accent-gold));
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --button-text: #ffffff;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
   /* Safe area for mobile notch */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -120,4 +127,46 @@ h1, h2, h3 {
 
 .pulse {
   animation: pulse-soft 3s infinite;
+}
+
+/* Easter Bloom Theme - Full Surface Overhaul */
+.feed-container[data-theme="easter"] {
+  --bg: #ffffff !important;
+  --text-primary: #1a1a1a !important;
+  --text-secondary: #444444 !important;
+  --card-bg: rgba(0, 0, 0, 0.03) !important;
+  --glass-border: rgba(0, 0, 0, 0.08) !important;
+  --accent-gold: #a1811a !important;
+  --bg-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.6) 100%) !important;
+  --title-gradient: linear-gradient(to right, #a1811a, #1a1a1a) !important;
+  --glass-bg: rgba(255, 255, 255, 0.9) !important;
+  --button-text: #1a1a1a !important;
+  --border-subtle: rgba(161, 129, 26, 0.2) !important;
+  background-color: #ffffff !important;
+  background-image: radial-gradient(circle at center, #ffffff 0%, #fffaf0 100%) !important;
+  color: #1a1a1a !important;
+}
+
+[data-theme="easter"] .glass {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(161, 129, 26, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="easter"] .progress-fill {
+  background: #ffca28 !important;
+}
+
+/* Ensure ALL children follow the light theme */
+[data-theme="easter"] * {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="easter"] h1, 
+[data-theme="easter"] h2, 
+[data-theme="easter"] h3, 
+[data-theme="easter"] p, 
+[data-theme="easter"] div,
+[data-theme="easter"] span {
+  color: #1a1a1a !important;
 }

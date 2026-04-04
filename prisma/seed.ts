@@ -26,19 +26,27 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
     },
     {
       type: "SCRIPTURE",
-      scheduledDay: "THURSDAY",
-      title: "Holy Thursday",
-      scriptureRef: "John 13:34-35",
-      content: "I give you a new commandment: love one another. As I have loved you, so you also should love one another. This is how all will know that you are my disciples…",
-      author: "Love like Jesus — even when it costs everything.",
+      scheduledDay: "FRIDAY",
+      title: "Good Friday",
+      scriptureRef: "John 19:30",
+      content: "When Jesus had taken the wine, he said, 'It is finished.' And bowing his head, he handed over the spirit.",
+      author: "It is finished. He gave everything for you.",
     },
     {
       type: "SCRIPTURE",
-      scheduledDay: "THURSDAY",
-      title: "Holy Thursday",
-      scriptureRef: "Luke 22:42",
-      content: "Father, if you are willing, take this cup away from me; still, not my will but yours be done.",
-      author: "Where in my life am I called to say “not my will”?",
+      scheduledDay: "SATURDAY",
+      title: "Holy Saturday",
+      scriptureRef: "Matthew 27:66",
+      content: "So they went and made the tomb secure by sealing the stone and setting the guard.",
+      author: "In the silence, God is working. Trust the wait.",
+    },
+    {
+      type: "SCRIPTURE",
+      scheduledDay: "EASTER",
+      title: "Easter Sunday",
+      scriptureRef: "John 20:1-9",
+      content: "On the first day of the week, Mary of Magdala came to the tomb early in the morning... and saw the stone removed from the tomb. So she ran and went to Simon Peter... 'They have taken the Lord from the tomb, and we don’t know where they put him.'",
+      author: "He is Risen! The tomb is empty. The world is reborn.",
     }
   ];
 
