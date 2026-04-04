@@ -154,13 +154,39 @@
 
 :global([data-theme="easter"]) .sectionHeaderCard .headerOverlay,
 :global([data-theme="easter"]) .endCard .headerOverlay {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%) !important;
+  background: linear-gradient(to bottom, rgba(255, 252, 240, 0.18) 0%, rgba(255, 252, 240, 0.72) 100%) !important;
 }
 
 :global([data-theme="easter"]) .endCard h3,
 :global([data-theme="easter"]) .endCard div,
 :global([data-theme="easter"]) .endCard span {
-  color: #000000 !important;
+  color: #1d2a21 !important;
+}
+
+:global([data-theme="easter"]) .devotionSwitcher {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(161, 129, 26, 0.24) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+:global([data-theme="easter"]) .switcherBtn {
+  color: rgba(29, 42, 33, 0.72) !important;
+}
+
+:global([data-theme="easter"]) .activeSwitcher {
+  background: #d4b24c !important;
+  color: #1d2a21 !important;
+  box-shadow: 0 0 15px rgba(212, 178, 76, 0.35) !important;
+}
+
+:global([data-theme="easter"]) .sectionHeaderCard h1,
+:global([data-theme="easter"]) .sectionHeaderCard p,
+:global([data-theme="easter"]) .sectionHeaderCard span {
+  color: #1d2a21 !important;
+}
+
+:global([data-theme="easter"]) .bgImage {
+  filter: blur(3px) brightness(0.95) saturate(1) !important;
 }
 
 /* Ordinary Time Overrides for Feed Controls */

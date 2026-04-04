@@ -23,7 +23,17 @@ interface ContentCardProps {
   customBackground?: string;
 }
 
-const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => {
+const ContentCard: React.FC<ContentCardProps> = ({ post: rawPost, customBackground }) => {
+  const isPrayer = rawPost.title?.toLowerCase().includes("prayer");
+  const post = rawPost.title === "Prayer to Jesus Christ Crucified" || rawPost.title === "Easter Prayer of Hope"
+    ? {
+        ...rawPost,
+        title: "Easter Prayer of Hope",
+        content:
+          "Almighty and Ever-Living God, by the Resurrection of Your Son, You have shattered the darkness of death and opened the way to eternal life. We beseech You: let the light of the Risen Christ shine brightly within us. May the hope of the Empty Tomb banish our fears, heal our wounds, and kindle in us a joy that the world cannot take away. Make us witnesses of Your New Life in every word we speak and every deed we perform. Amen.",
+        author: "Easter Season Prayer",
+      }
+    : rawPost;
   const [isVisible, setIsVisible] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
   const [showScripture, setShowScripture] = useState(false);
@@ -62,25 +72,45 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, customBackground }) => 
 
         {/* Liturgy Daily Entries */}
         {!post.stationNumber && post.type === "SCRIPTURE" && (
-          <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+          <div className={styles.scripturePanel}>
             <span className={styles.typeBadge}>{post.title}</span>
-            <h3 className={styles.goldHeader} style={{ fontSize: '1.2rem', marginBottom: '2rem' }}>{post.scriptureRef}</h3>
+            <h3 className={styles.goldHeader} style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>{post.scriptureRef}</h3>
             <p className={`${styles.scriptureTextVerbatim}`}>{post.content}</p>
-            <div className={styles.salutationBox}>
-              <p className={styles.bodyText} style={{ fontStyle: 'italic' }}>{post.author}</p>
-            </div>
+
+            {post.author && (
+              <div className={styles.scriptureMeta}>
+                <p className={styles.bodyText} style={{ fontStyle: 'italic' }}>{post.author}</p>
+              </div>
+            )}
+
+            {(post.prayerText || post.prayerResponse) && (
+              <div className={styles.scripturePrayer}>
+                <h4 className={styles.sectionHeader}>Prayer</h4>
+                {post.prayerText && <p className={styles.bodyText}>{post.prayerText}</p>}
+                {post.prayerResponse && <p className={styles.salutationText} style={{ marginTop: '0.75rem' }}>{post.prayerResponse}</p>}
+              </div>
+            )}
           </div>
         )}
 
-        {/* Regular Reflections */}
+        {/* Regular Reflections & Prayers */}
         {!post.stationNumber && post.type === "REFLECT" && (
-          <>
-            <span className={styles.typeBadge}>
-              {post.title.toLowerCase().includes('prayer') ? 'Prayer' : 'Reflection'}
-            </span>
+          <div className={isPrayer ? styles.prayerLayout : styles.reflectionLayout}>
+            {isPrayer && (
+              <div className={styles.prayerIcon}>
+                {post.title?.toLowerCase().includes("easter") ? "🌅" : "🕊️"}
+              </div>
+            )}
             <h2 className={styles.reflectionTitle}>{post.title}</h2>
-            <p className={styles.reflectionBody}>{post.content}</p>
-          </>
+            <div className={isPrayer ? styles.prayerBody : styles.reflectionBody}>
+              {post.content}
+            </div>
+            {isPrayer && (
+              <div className={styles.prayerRef}>
+                {post.author}
+              </div>
+            )}
+          </div>
         )}
 
         {/* Liguori Versicles/Responses & Reflections */}

@@ -14,7 +14,7 @@ const FALLBACK_POSTS = [
     type: "REFLECT",
     title: "Opening Prayer",
     content:
-      "Lord Jesus, stay with me in every season. Strengthen my faith, renew my hope, and teach me to love as You love.",
+      "Lord Jesus, as I enter this sacred space, I invite Your presence into my heart. Calm my restless thoughts, still my spirit, and open my soul to Your Word. Let this moment of prayer be a sanctuary where Your light renews my hope and Your love transforms my path. Stay with me, Lord, now and through every season. Amen.",
     author: "Faith Feed",
     scriptureRef: null,
     imageUrl: "/backgrounds/guide.jpg",
@@ -54,6 +54,64 @@ const FALLBACK_POSTS = [
     imageUrl: "/backgrounds/outro.jpg",
     category: "GENERAL",
     scheduledDay: null,
+    stationNumber: null,
+    prayerText: null,
+    prayerResponse: null,
+    introText: null,
+    outroText: null,
+  },
+];
+
+const EASTER_SEASON_SUPPLEMENTS = [
+  {
+    id: "easter-season-scripture-1",
+    type: "SCRIPTURE",
+    title: "Easter Season Gospel",
+    content:
+      "Jesus said to him, \"I am the way and the truth and the life. No one comes to the Father except through me.\"",
+    author: "Let the Risen Christ lead your path this week.",
+    scriptureRef: "John 14:6",
+    imageUrl: "/backgrounds/easter.jpg",
+    category: "GENERAL",
+    scheduledDay: "EASTER_SEASON",
+    stationNumber: null,
+    prayerText:
+      "Lord Jesus, You are the way when I feel lost, the truth when I am confused, and the life when I am tired. Keep my heart close to You in this Easter Season.",
+    prayerResponse:
+      "Risen Lord, renew my hope and teach me to walk in Your light each day. Amen.",
+    introText: null,
+    outroText: null,
+  },
+  {
+    id: "easter-season-scripture-2",
+    type: "SCRIPTURE",
+    title: "Easter Season Promise",
+    content:
+      "And behold, I am with you always, until the end of the age.",
+    author: "He is with us in ordinary routines and hidden struggles.",
+    scriptureRef: "Matthew 28:20",
+    imageUrl: "/backgrounds/easter.jpg",
+    category: "GENERAL",
+    scheduledDay: "EASTER_SEASON",
+    stationNumber: null,
+    prayerText:
+      "Risen Jesus, stay with me in my studies, work, family life, and quiet moments. Let me never forget Your faithful presence.",
+    prayerResponse:
+      "Lord, make my life a witness of Your resurrection peace. Amen.",
+    introText: null,
+    outroText: null,
+  },
+  {
+    id: "easter-season-prayer-1",
+    type: "REFLECT",
+    title: "Prayer for the Fifty Days",
+    content:
+      "Risen Christ, breathe new life into what is weary in me. Heal what is wounded, strengthen what is weak, and kindle joy where there is fear. May Your victory over death shape my words, choices, and love for others. Amen.",
+    author: "Easter Season Prayer",
+    scriptureRef: null,
+    imageUrl: "/backgrounds/easter.jpg",
+    category: "GENERAL",
+    scheduledDay: "EASTER_SEASON",
     stationNumber: null,
     prayerText: null,
     prayerResponse: null,
@@ -197,12 +255,16 @@ const VerticalFeed: React.FC = () => {
 
   const safePosts = posts && posts.length > 0 ? posts : FALLBACK_POSTS;
   const todayScriptures = safePosts.filter(p => p.scheduledDay === currentDay && currentDay !== null);
+  const easterSeasonPosts = currentDay === "EASTER_SEASON"
+    ? EASTER_SEASON_SUPPLEMENTS.filter((item) => !safePosts.some((post) => post.id === item.id))
+    : [];
+  const todayLiturgicalPosts = [...todayScriptures, ...easterSeasonPosts];
   const filteredGeneralPosts = safePosts.filter(p => !p.scheduledDay && (p.category === selectedDevotion || p.category === "GENERAL"));
   const ordinaryPosts = safePosts.filter(p => !p.scheduledDay && p.category === "GENERAL");
   
   const isDevotionAvailable = currentDay === "THURSDAY" || currentDay === "FRIDAY";
   const shouldUseOrdinaryTheme = currentSeason === "ORDINARY_TIME";
-  const hasSeasonHeader = todayScriptures.length > 0 || currentDay === "EASTER_SEASON" || currentDay === "ORDINARY_TIME";
+  const hasSeasonHeader = todayLiturgicalPosts.length > 0 || currentDay === "EASTER_SEASON" || currentDay === "ORDINARY_TIME";
   const displayedGeneralPosts = isDevotionAvailable ? filteredGeneralPosts : ordinaryPosts;
   const theme = currentDay === "EASTER" || currentDay === "EASTER_SEASON"
     ? "easter"
@@ -338,7 +400,7 @@ const VerticalFeed: React.FC = () => {
       )}
 
       {/* Today's Scriptures */}
-      {todayScriptures.map((post) => (
+      {todayLiturgicalPosts.map((post) => (
         <ContentCard 
           key={post.id} 
           post={post} 

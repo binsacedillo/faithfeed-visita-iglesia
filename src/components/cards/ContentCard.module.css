@@ -193,7 +193,55 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-style: italic;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Add depth for readability */
+  /* ISO UX: Add depth for readability */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+  text-align: inherit;
+}
+
+.prayerLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  background: radial-gradient(circle at center, rgba(147, 51, 234, 0.05) 0%, transparent 70%);
+  animation: fadeInPrayer 1s ease-out;
+}
+
+.prayerIcon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 15px rgba(255, 202, 40, 0.4));
+}
+
+.prayerBody {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  max-width: 90%;
+  margin: 0 auto;
+  position: relative;
+  letter-spacing: 0.02em;
+}
+
+.prayerRef {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+@keyframes fadeInPrayer {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .reflectionBody {
@@ -381,6 +429,32 @@
   transform: translateX(-50%);
 }
 
+.scripturePanel {
+  text-align: center;
+  padding: 1.75rem 1rem 2.25rem;
+  border-radius: 24px;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-subtle);
+}
+
+.scriptureMeta {
+  margin-top: 1.25rem;
+  border-left: 3px solid var(--accent-gold);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  text-align: left;
+  background: rgba(255, 202, 40, 0.08);
+}
+
+.scripturePrayer {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 14px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
 /* Easter Overrides for ContentCard */
 :global([data-theme="easter"]) .goldHeader {
   color: #a1811a !important; /* Brighter, deeper gold on white */
@@ -388,21 +462,67 @@
 }
 
 :global([data-theme="easter"]) .scriptureTextVerbatim {
-  color: #000000 !important;
+  color: #1d2a21 !important;
 }
 
 :global([data-theme="easter"]) .salutationBox {
-  background: rgba(0, 0, 0, 0.04) !important;
+  background: rgba(255, 255, 255, 0.84) !important;
   border-color: rgba(161, 129, 26, 0.2) !important;
 }
 
 :global([data-theme="easter"]) .salutationBox p {
-  color: #333333 !important;
+  color: #1d2a21 !important;
 }
 
 :global([data-theme="easter"]) .typeBadge {
   background: rgba(161, 129, 26, 0.08) !important;
   color: #a1811a !important;
+}
+
+:global([data-theme="easter"]) .reflectionBody,
+:global([data-theme="easter"]) .bodyText,
+:global([data-theme="easter"]) .salutationText {
+  color: #1d2a21 !important;
+}
+
+:global([data-theme="easter"]) .scripturePanel {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(161, 129, 26, 0.24) !important;
+}
+
+:global([data-theme="easter"]) .scriptureMeta,
+:global([data-theme="easter"]) .scripturePrayer {
+  background: rgba(246, 238, 212, 0.56) !important;
+  border-color: rgba(161, 129, 26, 0.26) !important;
+}
+
+:global([data-theme="easter"]) .overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 253, 245, 0.12) 0%,
+    rgba(255, 253, 245, 0.48) 42%,
+    rgba(255, 253, 245, 0.88) 100%
+  ) !important;
+}
+
+:global([data-theme="easter"]) .stationHeader,
+:global([data-theme="easter"]) .consideration,
+:global([data-theme="easter"]) .prayerResponse,
+:global([data-theme="easter"]) .drawerContent.open {
+  background: rgba(255, 255, 255, 0.84) !important;
+  color: #1d2a21 !important;
+  border-color: rgba(161, 129, 26, 0.22) !important;
+}
+
+:global([data-theme="easter"]) .prayerResponse {
+  border-left-color: rgba(161, 129, 26, 0.72) !important;
+}
+
+:global([data-theme="easter"]) .drawerToggle,
+:global([data-theme="easter"]) .sectionHeader,
+:global([data-theme="easter"]) .label,
+:global([data-theme="easter"]) .instruction {
+  color: #1d2a21 !important;
 }
 
 /* Ordinary Time Overrides for ContentCard */
@@ -427,6 +547,17 @@
 :global([data-theme="ordinary"]) .typeBadge {
   background: rgba(212, 178, 76, 0.12) !important;
   color: #d4b24c !important;
+}
+
+:global([data-theme="ordinary"]) .scripturePanel {
+  background: rgba(10, 37, 23, 0.75) !important;
+  border-color: rgba(212, 178, 76, 0.28) !important;
+}
+
+:global([data-theme="ordinary"]) .scriptureMeta,
+:global([data-theme="ordinary"]) .scripturePrayer {
+  background: rgba(13, 52, 31, 0.62) !important;
+  border-color: rgba(212, 178, 76, 0.24) !important;
 }
 .footer {
   margin-top: 1.5rem;
