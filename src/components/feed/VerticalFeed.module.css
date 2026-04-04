@@ -163,6 +163,27 @@
   color: #000000 !important;
 }
 
+/* Ordinary Time Overrides for Feed Controls */
+:global([data-theme="ordinary"]) .navBtn {
+  color: #f2f7f1 !important;
+}
+
+:global([data-theme="ordinary"]) .navContainer {
+  background: rgba(12, 46, 28, 0.45) !important;
+  border-color: rgba(212, 178, 76, 0.32) !important;
+}
+
+:global([data-theme="ordinary"]) .finaleBtn {
+  background: rgba(12, 46, 28, 0.58) !important;
+  color: #d4b24c !important;
+  border-color: #d4b24c !important;
+}
+
+:global([data-theme="ordinary"]) .sectionHeaderCard .headerOverlay,
+:global([data-theme="ordinary"]) .endCard .headerOverlay {
+  background: linear-gradient(to bottom, rgba(8, 28, 17, 0.5) 0%, rgba(8, 28, 17, 0.92) 100%) !important;
+}
+
 /* Devotion Switcher */
 .devotionSwitcher {
   position: fixed;

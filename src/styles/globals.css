@@ -171,3 +171,31 @@ h1, h2, h3 {
 [data-theme="easter"] span {
   color: #1a1a1a !important;
 }
+
+/* Ordinary Time Theme - Green and gold devotional palette */
+.feed-container[data-theme="ordinary"] {
+  --bg: #0b1f16 !important;
+  --text-primary: #f2f7f1 !important;
+  --text-secondary: rgba(242, 247, 241, 0.72) !important;
+  --card-bg: rgba(12, 46, 28, 0.45) !important;
+  --glass-border: rgba(161, 129, 26, 0.24) !important;
+  --accent-gold: #d4b24c !important;
+  --accent-purple: #4caf50 !important;
+  --accent-purple-glow: rgba(76, 175, 80, 0.25) !important;
+  --bg-overlay: linear-gradient(to bottom, rgba(5, 20, 12, 0.35) 0%, rgba(5, 20, 12, 0.9) 100%) !important;
+  --title-gradient: linear-gradient(to right, #f2f7f1, #d4b24c) !important;
+  --glass-bg: rgba(12, 46, 28, 0.38) !important;
+  --button-text: #f2f7f1 !important;
+  --border-subtle: rgba(212, 178, 76, 0.28) !important;
+  background-color: #0b1f16 !important;
+  background-image: radial-gradient(circle at top, #1f4f35 0%, #0b1f16 65%) !important;
+}
+
+[data-theme="ordinary"] .glass {
+  background: rgba(12, 46, 28, 0.45) !important;
+  border: 1px solid rgba(212, 178, 76, 0.24) !important;
+}
+
+[data-theme="ordinary"] .progress-fill {
+  background: linear-gradient(to right, #4caf50, #d4b24c, #4caf50) !important;
+}

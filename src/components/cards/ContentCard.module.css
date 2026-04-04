@@ -404,6 +404,30 @@
   background: rgba(161, 129, 26, 0.08) !important;
   color: #a1811a !important;
 }
+
+/* Ordinary Time Overrides for ContentCard */
+:global([data-theme="ordinary"]) .goldHeader {
+  color: #d4b24c !important;
+  text-shadow: none !important;
+}
+
+:global([data-theme="ordinary"]) .scriptureTextVerbatim {
+  color: #f2f7f1 !important;
+}
+
+:global([data-theme="ordinary"]) .salutationBox {
+  background: rgba(12, 46, 28, 0.45) !important;
+  border-color: rgba(212, 178, 76, 0.25) !important;
+}
+
+:global([data-theme="ordinary"]) .salutationBox p {
+  color: #f2f7f1 !important;
+}
+
+:global([data-theme="ordinary"]) .typeBadge {
+  background: rgba(212, 178, 76, 0.12) !important;
+  color: #d4b24c !important;
+}
 .footer {
   margin-top: 1.5rem;
   display: flex;
