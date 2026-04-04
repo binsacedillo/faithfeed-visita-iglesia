@@ -325,6 +325,7 @@ Glory be to the Father, and to the Son, and to the Holy Spirit, as it was in the
     {
       type: "REFLECT",
       category: "GENERAL",
+      scheduledDay: "EASTER_SEASON",
       title: "Easter Prayer of Hope",
       content: "Risen Jesus, You have conquered sin and death. Let Your light rise in my heart, Your peace settle my fears, and Your joy shape my words and choices. Teach me to live as a witness of resurrection hope, and to carry that hope into every ordinary day.",
       author: "Easter Season Prayer",
