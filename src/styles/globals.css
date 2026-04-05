@@ -132,19 +132,20 @@ h1, h2, h3 {
 /* Easter Bloom Theme - Full Surface Overhaul */
 .feed-container[data-theme="easter"] {
   --bg: #ffffff !important;
-  --text-primary: #1a1a1a !important;
-  --text-secondary: #444444 !important;
-  --card-bg: rgba(0, 0, 0, 0.03) !important;
-  --glass-border: rgba(0, 0, 0, 0.08) !important;
-  --accent-gold: #a1811a !important;
-  --bg-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.6) 100%) !important;
-  --title-gradient: linear-gradient(to right, #a1811a, #1a1a1a) !important;
-  --glass-bg: rgba(255, 255, 255, 0.9) !important;
-  --button-text: #1a1a1a !important;
-  --border-subtle: rgba(161, 129, 26, 0.2) !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #222222 !important;
+  --card-bg: rgba(255, 255, 255, 0.95) !important;
+  --glass-border: rgba(161, 129, 26, 0.3) !important;
+  --accent-gold: #8c6d12 !important;
+  /* Stronger light overlay to separate text from background image */
+  --bg-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
+  --title-gradient: linear-gradient(to right, #8c6d12, #000000) !important;
+  --glass-bg: rgba(255, 255, 255, 0.95) !important;
+  --button-text: #000000 !important;
+  --border-subtle: rgba(161, 129, 26, 0.4) !important;
   background-color: #ffffff !important;
   background-image: radial-gradient(circle at center, #ffffff 0%, #fffaf0 100%) !important;
-  color: #1a1a1a !important;
+  color: #000000 !important;
 }
 
 [data-theme="easter"] .glass {

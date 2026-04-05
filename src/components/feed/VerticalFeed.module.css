@@ -143,8 +143,13 @@
   border-color: #a1811a !important;
 }
 
+:global([data-theme="easter"]) .sectionHeaderCard .headerOverlay,
+:global([data-theme="easter"]) .endCard .headerOverlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.5) 100%) !important;
+}
+
 :global([data-theme="easter"]) .endCard h3,
 :global([data-theme="easter"]) .endCard div,
 :global([data-theme="easter"]) .endCard span {
-  color: #1a1a1a !important;
+  color: #000000 !important;
 }

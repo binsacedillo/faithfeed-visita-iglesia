@@ -287,7 +287,7 @@
 }
 
 :global([data-theme="easter"]) .scriptureTextVerbatim {
-  color: #1a1a1a !important;
+  color: #000000 !important;
 }
 
 :global([data-theme="easter"]) .salutationBox {
