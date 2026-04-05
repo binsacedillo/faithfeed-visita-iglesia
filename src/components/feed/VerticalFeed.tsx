@@ -184,6 +184,7 @@ const VerticalFeed: React.FC = () => {
             currentDay === "THURSDAY" ? "/backgrounds/thursday.jpg" :
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" : 
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" : 
+            currentDay === "EASTER" ? "/backgrounds/easter.jpg" :
             undefined
           }
         />
@@ -203,7 +204,7 @@ const VerticalFeed: React.FC = () => {
           src={
             currentDay === "FRIDAY" ? "/backgrounds/friday.jpg" :
             currentDay === "SATURDAY" ? "/backgrounds/saturday.jpg" :
-            currentDay === "EASTER" ? "/backgrounds/easter.jpg" : "/backgrounds/outro.jpg"
+            currentDay === "EASTER" ? "/backgrounds/outro.jpg" : "/backgrounds/outro.jpg"
           }
           alt="Conclusion"
           fill
@@ -211,7 +212,7 @@ const VerticalFeed: React.FC = () => {
           style={{ objectFit: 'cover' }}
           className={styles.bgImage}
         />
-        <div className={styles.headerOverlay} style={{ opacity: 0.6 }} />
+        <div className={styles.headerOverlay} />
         <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
           <button 
             className={`glass ${styles.finaleBtn}`}
@@ -230,7 +231,7 @@ const VerticalFeed: React.FC = () => {
             marginTop: '2rem',
             color: 'var(--text-primary)'
           }}>
-            A {new Date().getFullYear()} Holy Week Offering by Vince Gio Acedillo
+            A 2026 Holy Week Offering by Vince Gio Acedillo
             <div style={{ 
               opacity: 1, 
               marginTop: '1.25rem', 
