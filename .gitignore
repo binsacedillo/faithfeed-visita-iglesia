@@ -50,3 +50,8 @@ yarn-error.log*
 # prisma generated binaries and temps
 **/query_engine-windows.dll.node.tmp*
 /generated/prisma/query_engine-windows.dll.node
+
+# PWA generated service worker files
+/public/sw.js
+/public/sw.js.map
+/public/workbox-*.js
