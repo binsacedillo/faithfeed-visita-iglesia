@@ -197,3 +197,43 @@ h1, h2, h3 {
 [data-theme="ordinary"] .progress-fill {
   background: linear-gradient(to right, #4caf50, #d4b24c, #4caf50) !important;
 }
+
+/* Pentecost Sunday Theme - Fiery Red and Gold palette */
+.feed-container[data-theme="pentecost"] {
+  --bg: #1a0202 !important;
+  --text-primary: #fff2f2 !important;
+  --text-secondary: rgba(255, 242, 242, 0.72) !important;
+  --card-bg: rgba(66, 6, 6, 0.45) !important;
+  --glass-border: rgba(255, 202, 40, 0.24) !important;
+  --accent-gold: #ffca28 !important;
+  --accent-purple: #d32f2f !important;
+  --accent-purple-glow: rgba(211, 47, 47, 0.25) !important;
+  --bg-overlay: linear-gradient(to bottom, rgba(30, 2, 2, 0.35) 0%, rgba(15, 0, 0, 0.92) 100%) !important;
+  --title-gradient: linear-gradient(to right, #fff2f2, #ffca28) !important;
+  --glass-bg: rgba(66, 6, 6, 0.38) !important;
+  --button-text: #fff2f2 !important;
+  --border-subtle: rgba(255, 202, 40, 0.28) !important;
+  background-color: #1a0202 !important;
+  background-image: radial-gradient(circle at top, #5c0b0b 0%, #1a0202 70%) !important;
+  color: #fff2f2 !important;
+}
+
+[data-theme="pentecost"] .glass {
+  background: rgba(66, 6, 6, 0.45) !important;
+  border: 1px solid rgba(255, 202, 40, 0.24) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="pentecost"] .progress-fill {
+  background: linear-gradient(to right, #d32f2f, #ffca28, #d32f2f) !important;
+}
+
+[data-theme="pentecost"] .feed-container,
+[data-theme="pentecost"] .card,
+[data-theme="pentecost"] .content,
+[data-theme="pentecost"] .drawerToggle,
+[data-theme="pentecost"] .drawerContent,
+[data-theme="pentecost"] .sectionHeaderCard,
+[data-theme="pentecost"] .endCard {
+  color: var(--text-primary) !important;
+}
