@@ -16,7 +16,28 @@ export const postRouter = createTRPCRouter({
     });
   }),
 
+  getLiturgicalReading: publicProcedure
+    .input(
+      z.object({
+        season: z.string(),
+        weekOfSeason: z.number(),
+        dayOfWeek: z.string(),
+        cycle: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      return ctx.db.liturgicalReading.findFirst({
+        where: {
+          season: input.season,
+          weekOfSeason: input.weekOfSeason,
+          dayOfWeek: input.dayOfWeek,
+          cycle: { in: [input.cycle, "ANY"] },
+        },
+      });
+    }),
+
   create: publicProcedure
+
     .input(
       z.object({
         type: z.string(),

@@ -115,6 +115,9 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -138,9 +141,34 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.LiturgicalReadingScalarFieldEnum = {
+  id: 'id',
+  cycle: 'cycle',
+  season: 'season',
+  weekOfSeason: 'weekOfSeason',
+  dayOfWeek: 'dayOfWeek',
+  isFeast: 'isFeast',
+  feastMonth: 'feastMonth',
+  feastDay: 'feastDay',
+  title: 'title',
+  gospelRef: 'gospelRef',
+  gospelText: 'gospelText',
+  reflection: 'reflection',
+  prayerText: 'prayerText',
+  prayerResponse: 'prayerResponse',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -150,7 +178,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Post: 'Post',
+  LiturgicalReading: 'LiturgicalReading'
 };
 
 /**

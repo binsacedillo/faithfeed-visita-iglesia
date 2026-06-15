@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
+/**
+ * Model LiturgicalReading
+ * 
+ */
+export type LiturgicalReading = $Result.DefaultSelection<Prisma.$LiturgicalReadingPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -146,6 +151,16 @@ export class PrismaClient<
     * ```
     */
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.liturgicalReading`: Exposes CRUD operations for the **LiturgicalReading** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LiturgicalReadings
+    * const liturgicalReadings = await prisma.liturgicalReading.findMany()
+    * ```
+    */
+  get liturgicalReading(): Prisma.LiturgicalReadingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -587,7 +602,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Post: 'Post'
+    Post: 'Post',
+    LiturgicalReading: 'LiturgicalReading'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -606,7 +622,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "post"
+      modelProps: "post" | "liturgicalReading"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -681,6 +697,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PostCountArgs<ExtArgs>
             result: $Utils.Optional<PostCountAggregateOutputType> | number
+          }
+        }
+      }
+      LiturgicalReading: {
+        payload: Prisma.$LiturgicalReadingPayload<ExtArgs>
+        fields: Prisma.LiturgicalReadingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LiturgicalReadingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LiturgicalReadingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          findFirst: {
+            args: Prisma.LiturgicalReadingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LiturgicalReadingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          findMany: {
+            args: Prisma.LiturgicalReadingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>[]
+          }
+          create: {
+            args: Prisma.LiturgicalReadingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          createMany: {
+            args: Prisma.LiturgicalReadingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LiturgicalReadingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>[]
+          }
+          delete: {
+            args: Prisma.LiturgicalReadingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          update: {
+            args: Prisma.LiturgicalReadingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          deleteMany: {
+            args: Prisma.LiturgicalReadingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LiturgicalReadingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LiturgicalReadingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>[]
+          }
+          upsert: {
+            args: Prisma.LiturgicalReadingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LiturgicalReadingPayload>
+          }
+          aggregate: {
+            args: Prisma.LiturgicalReadingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLiturgicalReading>
+          }
+          groupBy: {
+            args: Prisma.LiturgicalReadingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LiturgicalReadingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LiturgicalReadingCountArgs<ExtArgs>
+            result: $Utils.Optional<LiturgicalReadingCountAggregateOutputType> | number
           }
         }
       }
@@ -781,6 +871,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     post?: PostOmit
+    liturgicalReading?: LiturgicalReadingOmit
   }
 
   /* Types for Logging */
@@ -1885,6 +1976,7 @@ export namespace Prisma {
      * The data used to create many Posts.
      */
     data: PostCreateManyInput | PostCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -1903,6 +1995,7 @@ export namespace Prisma {
      * The data used to create many Posts.
      */
     data: PostCreateManyInput | PostCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -2045,10 +2138,1206 @@ export namespace Prisma {
 
 
   /**
+   * Model LiturgicalReading
+   */
+
+  export type AggregateLiturgicalReading = {
+    _count: LiturgicalReadingCountAggregateOutputType | null
+    _avg: LiturgicalReadingAvgAggregateOutputType | null
+    _sum: LiturgicalReadingSumAggregateOutputType | null
+    _min: LiturgicalReadingMinAggregateOutputType | null
+    _max: LiturgicalReadingMaxAggregateOutputType | null
+  }
+
+  export type LiturgicalReadingAvgAggregateOutputType = {
+    weekOfSeason: number | null
+    feastMonth: number | null
+    feastDay: number | null
+  }
+
+  export type LiturgicalReadingSumAggregateOutputType = {
+    weekOfSeason: number | null
+    feastMonth: number | null
+    feastDay: number | null
+  }
+
+  export type LiturgicalReadingMinAggregateOutputType = {
+    id: string | null
+    cycle: string | null
+    season: string | null
+    weekOfSeason: number | null
+    dayOfWeek: string | null
+    isFeast: boolean | null
+    feastMonth: number | null
+    feastDay: number | null
+    title: string | null
+    gospelRef: string | null
+    gospelText: string | null
+    reflection: string | null
+    prayerText: string | null
+    prayerResponse: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LiturgicalReadingMaxAggregateOutputType = {
+    id: string | null
+    cycle: string | null
+    season: string | null
+    weekOfSeason: number | null
+    dayOfWeek: string | null
+    isFeast: boolean | null
+    feastMonth: number | null
+    feastDay: number | null
+    title: string | null
+    gospelRef: string | null
+    gospelText: string | null
+    reflection: string | null
+    prayerText: string | null
+    prayerResponse: string | null
+    imageUrl: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LiturgicalReadingCountAggregateOutputType = {
+    id: number
+    cycle: number
+    season: number
+    weekOfSeason: number
+    dayOfWeek: number
+    isFeast: number
+    feastMonth: number
+    feastDay: number
+    title: number
+    gospelRef: number
+    gospelText: number
+    reflection: number
+    prayerText: number
+    prayerResponse: number
+    imageUrl: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LiturgicalReadingAvgAggregateInputType = {
+    weekOfSeason?: true
+    feastMonth?: true
+    feastDay?: true
+  }
+
+  export type LiturgicalReadingSumAggregateInputType = {
+    weekOfSeason?: true
+    feastMonth?: true
+    feastDay?: true
+  }
+
+  export type LiturgicalReadingMinAggregateInputType = {
+    id?: true
+    cycle?: true
+    season?: true
+    weekOfSeason?: true
+    dayOfWeek?: true
+    isFeast?: true
+    feastMonth?: true
+    feastDay?: true
+    title?: true
+    gospelRef?: true
+    gospelText?: true
+    reflection?: true
+    prayerText?: true
+    prayerResponse?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LiturgicalReadingMaxAggregateInputType = {
+    id?: true
+    cycle?: true
+    season?: true
+    weekOfSeason?: true
+    dayOfWeek?: true
+    isFeast?: true
+    feastMonth?: true
+    feastDay?: true
+    title?: true
+    gospelRef?: true
+    gospelText?: true
+    reflection?: true
+    prayerText?: true
+    prayerResponse?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LiturgicalReadingCountAggregateInputType = {
+    id?: true
+    cycle?: true
+    season?: true
+    weekOfSeason?: true
+    dayOfWeek?: true
+    isFeast?: true
+    feastMonth?: true
+    feastDay?: true
+    title?: true
+    gospelRef?: true
+    gospelText?: true
+    reflection?: true
+    prayerText?: true
+    prayerResponse?: true
+    imageUrl?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LiturgicalReadingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiturgicalReading to aggregate.
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiturgicalReadings to fetch.
+     */
+    orderBy?: LiturgicalReadingOrderByWithRelationInput | LiturgicalReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LiturgicalReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiturgicalReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiturgicalReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LiturgicalReadings
+    **/
+    _count?: true | LiturgicalReadingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LiturgicalReadingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LiturgicalReadingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LiturgicalReadingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LiturgicalReadingMaxAggregateInputType
+  }
+
+  export type GetLiturgicalReadingAggregateType<T extends LiturgicalReadingAggregateArgs> = {
+        [P in keyof T & keyof AggregateLiturgicalReading]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLiturgicalReading[P]>
+      : GetScalarType<T[P], AggregateLiturgicalReading[P]>
+  }
+
+
+
+
+  export type LiturgicalReadingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LiturgicalReadingWhereInput
+    orderBy?: LiturgicalReadingOrderByWithAggregationInput | LiturgicalReadingOrderByWithAggregationInput[]
+    by: LiturgicalReadingScalarFieldEnum[] | LiturgicalReadingScalarFieldEnum
+    having?: LiturgicalReadingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LiturgicalReadingCountAggregateInputType | true
+    _avg?: LiturgicalReadingAvgAggregateInputType
+    _sum?: LiturgicalReadingSumAggregateInputType
+    _min?: LiturgicalReadingMinAggregateInputType
+    _max?: LiturgicalReadingMaxAggregateInputType
+  }
+
+  export type LiturgicalReadingGroupByOutputType = {
+    id: string
+    cycle: string
+    season: string
+    weekOfSeason: number
+    dayOfWeek: string
+    isFeast: boolean
+    feastMonth: number | null
+    feastDay: number | null
+    title: string
+    gospelRef: string
+    gospelText: string
+    reflection: string
+    prayerText: string | null
+    prayerResponse: string | null
+    imageUrl: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: LiturgicalReadingCountAggregateOutputType | null
+    _avg: LiturgicalReadingAvgAggregateOutputType | null
+    _sum: LiturgicalReadingSumAggregateOutputType | null
+    _min: LiturgicalReadingMinAggregateOutputType | null
+    _max: LiturgicalReadingMaxAggregateOutputType | null
+  }
+
+  type GetLiturgicalReadingGroupByPayload<T extends LiturgicalReadingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LiturgicalReadingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LiturgicalReadingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LiturgicalReadingGroupByOutputType[P]>
+            : GetScalarType<T[P], LiturgicalReadingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LiturgicalReadingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cycle?: boolean
+    season?: boolean
+    weekOfSeason?: boolean
+    dayOfWeek?: boolean
+    isFeast?: boolean
+    feastMonth?: boolean
+    feastDay?: boolean
+    title?: boolean
+    gospelRef?: boolean
+    gospelText?: boolean
+    reflection?: boolean
+    prayerText?: boolean
+    prayerResponse?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["liturgicalReading"]>
+
+  export type LiturgicalReadingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cycle?: boolean
+    season?: boolean
+    weekOfSeason?: boolean
+    dayOfWeek?: boolean
+    isFeast?: boolean
+    feastMonth?: boolean
+    feastDay?: boolean
+    title?: boolean
+    gospelRef?: boolean
+    gospelText?: boolean
+    reflection?: boolean
+    prayerText?: boolean
+    prayerResponse?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["liturgicalReading"]>
+
+  export type LiturgicalReadingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cycle?: boolean
+    season?: boolean
+    weekOfSeason?: boolean
+    dayOfWeek?: boolean
+    isFeast?: boolean
+    feastMonth?: boolean
+    feastDay?: boolean
+    title?: boolean
+    gospelRef?: boolean
+    gospelText?: boolean
+    reflection?: boolean
+    prayerText?: boolean
+    prayerResponse?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["liturgicalReading"]>
+
+  export type LiturgicalReadingSelectScalar = {
+    id?: boolean
+    cycle?: boolean
+    season?: boolean
+    weekOfSeason?: boolean
+    dayOfWeek?: boolean
+    isFeast?: boolean
+    feastMonth?: boolean
+    feastDay?: boolean
+    title?: boolean
+    gospelRef?: boolean
+    gospelText?: boolean
+    reflection?: boolean
+    prayerText?: boolean
+    prayerResponse?: boolean
+    imageUrl?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LiturgicalReadingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cycle" | "season" | "weekOfSeason" | "dayOfWeek" | "isFeast" | "feastMonth" | "feastDay" | "title" | "gospelRef" | "gospelText" | "reflection" | "prayerText" | "prayerResponse" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["liturgicalReading"]>
+
+  export type $LiturgicalReadingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LiturgicalReading"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      cycle: string
+      season: string
+      weekOfSeason: number
+      dayOfWeek: string
+      isFeast: boolean
+      feastMonth: number | null
+      feastDay: number | null
+      title: string
+      gospelRef: string
+      gospelText: string
+      reflection: string
+      prayerText: string | null
+      prayerResponse: string | null
+      imageUrl: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["liturgicalReading"]>
+    composites: {}
+  }
+
+  type LiturgicalReadingGetPayload<S extends boolean | null | undefined | LiturgicalReadingDefaultArgs> = $Result.GetResult<Prisma.$LiturgicalReadingPayload, S>
+
+  type LiturgicalReadingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LiturgicalReadingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LiturgicalReadingCountAggregateInputType | true
+    }
+
+  export interface LiturgicalReadingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LiturgicalReading'], meta: { name: 'LiturgicalReading' } }
+    /**
+     * Find zero or one LiturgicalReading that matches the filter.
+     * @param {LiturgicalReadingFindUniqueArgs} args - Arguments to find a LiturgicalReading
+     * @example
+     * // Get one LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LiturgicalReadingFindUniqueArgs>(args: SelectSubset<T, LiturgicalReadingFindUniqueArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LiturgicalReading that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LiturgicalReadingFindUniqueOrThrowArgs} args - Arguments to find a LiturgicalReading
+     * @example
+     * // Get one LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LiturgicalReadingFindUniqueOrThrowArgs>(args: SelectSubset<T, LiturgicalReadingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiturgicalReading that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingFindFirstArgs} args - Arguments to find a LiturgicalReading
+     * @example
+     * // Get one LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LiturgicalReadingFindFirstArgs>(args?: SelectSubset<T, LiturgicalReadingFindFirstArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LiturgicalReading that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingFindFirstOrThrowArgs} args - Arguments to find a LiturgicalReading
+     * @example
+     * // Get one LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LiturgicalReadingFindFirstOrThrowArgs>(args?: SelectSubset<T, LiturgicalReadingFindFirstOrThrowArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LiturgicalReadings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LiturgicalReadings
+     * const liturgicalReadings = await prisma.liturgicalReading.findMany()
+     * 
+     * // Get first 10 LiturgicalReadings
+     * const liturgicalReadings = await prisma.liturgicalReading.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const liturgicalReadingWithIdOnly = await prisma.liturgicalReading.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LiturgicalReadingFindManyArgs>(args?: SelectSubset<T, LiturgicalReadingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LiturgicalReading.
+     * @param {LiturgicalReadingCreateArgs} args - Arguments to create a LiturgicalReading.
+     * @example
+     * // Create one LiturgicalReading
+     * const LiturgicalReading = await prisma.liturgicalReading.create({
+     *   data: {
+     *     // ... data to create a LiturgicalReading
+     *   }
+     * })
+     * 
+     */
+    create<T extends LiturgicalReadingCreateArgs>(args: SelectSubset<T, LiturgicalReadingCreateArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LiturgicalReadings.
+     * @param {LiturgicalReadingCreateManyArgs} args - Arguments to create many LiturgicalReadings.
+     * @example
+     * // Create many LiturgicalReadings
+     * const liturgicalReading = await prisma.liturgicalReading.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LiturgicalReadingCreateManyArgs>(args?: SelectSubset<T, LiturgicalReadingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LiturgicalReadings and returns the data saved in the database.
+     * @param {LiturgicalReadingCreateManyAndReturnArgs} args - Arguments to create many LiturgicalReadings.
+     * @example
+     * // Create many LiturgicalReadings
+     * const liturgicalReading = await prisma.liturgicalReading.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LiturgicalReadings and only return the `id`
+     * const liturgicalReadingWithIdOnly = await prisma.liturgicalReading.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LiturgicalReadingCreateManyAndReturnArgs>(args?: SelectSubset<T, LiturgicalReadingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LiturgicalReading.
+     * @param {LiturgicalReadingDeleteArgs} args - Arguments to delete one LiturgicalReading.
+     * @example
+     * // Delete one LiturgicalReading
+     * const LiturgicalReading = await prisma.liturgicalReading.delete({
+     *   where: {
+     *     // ... filter to delete one LiturgicalReading
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LiturgicalReadingDeleteArgs>(args: SelectSubset<T, LiturgicalReadingDeleteArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LiturgicalReading.
+     * @param {LiturgicalReadingUpdateArgs} args - Arguments to update one LiturgicalReading.
+     * @example
+     * // Update one LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LiturgicalReadingUpdateArgs>(args: SelectSubset<T, LiturgicalReadingUpdateArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LiturgicalReadings.
+     * @param {LiturgicalReadingDeleteManyArgs} args - Arguments to filter LiturgicalReadings to delete.
+     * @example
+     * // Delete a few LiturgicalReadings
+     * const { count } = await prisma.liturgicalReading.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LiturgicalReadingDeleteManyArgs>(args?: SelectSubset<T, LiturgicalReadingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiturgicalReadings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LiturgicalReadings
+     * const liturgicalReading = await prisma.liturgicalReading.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LiturgicalReadingUpdateManyArgs>(args: SelectSubset<T, LiturgicalReadingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LiturgicalReadings and returns the data updated in the database.
+     * @param {LiturgicalReadingUpdateManyAndReturnArgs} args - Arguments to update many LiturgicalReadings.
+     * @example
+     * // Update many LiturgicalReadings
+     * const liturgicalReading = await prisma.liturgicalReading.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LiturgicalReadings and only return the `id`
+     * const liturgicalReadingWithIdOnly = await prisma.liturgicalReading.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LiturgicalReadingUpdateManyAndReturnArgs>(args: SelectSubset<T, LiturgicalReadingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LiturgicalReading.
+     * @param {LiturgicalReadingUpsertArgs} args - Arguments to update or create a LiturgicalReading.
+     * @example
+     * // Update or create a LiturgicalReading
+     * const liturgicalReading = await prisma.liturgicalReading.upsert({
+     *   create: {
+     *     // ... data to create a LiturgicalReading
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LiturgicalReading we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LiturgicalReadingUpsertArgs>(args: SelectSubset<T, LiturgicalReadingUpsertArgs<ExtArgs>>): Prisma__LiturgicalReadingClient<$Result.GetResult<Prisma.$LiturgicalReadingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LiturgicalReadings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingCountArgs} args - Arguments to filter LiturgicalReadings to count.
+     * @example
+     * // Count the number of LiturgicalReadings
+     * const count = await prisma.liturgicalReading.count({
+     *   where: {
+     *     // ... the filter for the LiturgicalReadings we want to count
+     *   }
+     * })
+    **/
+    count<T extends LiturgicalReadingCountArgs>(
+      args?: Subset<T, LiturgicalReadingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LiturgicalReadingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LiturgicalReading.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LiturgicalReadingAggregateArgs>(args: Subset<T, LiturgicalReadingAggregateArgs>): Prisma.PrismaPromise<GetLiturgicalReadingAggregateType<T>>
+
+    /**
+     * Group by LiturgicalReading.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LiturgicalReadingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LiturgicalReadingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LiturgicalReadingGroupByArgs['orderBy'] }
+        : { orderBy?: LiturgicalReadingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LiturgicalReadingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLiturgicalReadingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LiturgicalReading model
+   */
+  readonly fields: LiturgicalReadingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LiturgicalReading.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LiturgicalReadingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LiturgicalReading model
+   */
+  interface LiturgicalReadingFieldRefs {
+    readonly id: FieldRef<"LiturgicalReading", 'String'>
+    readonly cycle: FieldRef<"LiturgicalReading", 'String'>
+    readonly season: FieldRef<"LiturgicalReading", 'String'>
+    readonly weekOfSeason: FieldRef<"LiturgicalReading", 'Int'>
+    readonly dayOfWeek: FieldRef<"LiturgicalReading", 'String'>
+    readonly isFeast: FieldRef<"LiturgicalReading", 'Boolean'>
+    readonly feastMonth: FieldRef<"LiturgicalReading", 'Int'>
+    readonly feastDay: FieldRef<"LiturgicalReading", 'Int'>
+    readonly title: FieldRef<"LiturgicalReading", 'String'>
+    readonly gospelRef: FieldRef<"LiturgicalReading", 'String'>
+    readonly gospelText: FieldRef<"LiturgicalReading", 'String'>
+    readonly reflection: FieldRef<"LiturgicalReading", 'String'>
+    readonly prayerText: FieldRef<"LiturgicalReading", 'String'>
+    readonly prayerResponse: FieldRef<"LiturgicalReading", 'String'>
+    readonly imageUrl: FieldRef<"LiturgicalReading", 'String'>
+    readonly createdAt: FieldRef<"LiturgicalReading", 'DateTime'>
+    readonly updatedAt: FieldRef<"LiturgicalReading", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LiturgicalReading findUnique
+   */
+  export type LiturgicalReadingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter, which LiturgicalReading to fetch.
+     */
+    where: LiturgicalReadingWhereUniqueInput
+  }
+
+  /**
+   * LiturgicalReading findUniqueOrThrow
+   */
+  export type LiturgicalReadingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter, which LiturgicalReading to fetch.
+     */
+    where: LiturgicalReadingWhereUniqueInput
+  }
+
+  /**
+   * LiturgicalReading findFirst
+   */
+  export type LiturgicalReadingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter, which LiturgicalReading to fetch.
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiturgicalReadings to fetch.
+     */
+    orderBy?: LiturgicalReadingOrderByWithRelationInput | LiturgicalReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiturgicalReadings.
+     */
+    cursor?: LiturgicalReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiturgicalReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiturgicalReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiturgicalReadings.
+     */
+    distinct?: LiturgicalReadingScalarFieldEnum | LiturgicalReadingScalarFieldEnum[]
+  }
+
+  /**
+   * LiturgicalReading findFirstOrThrow
+   */
+  export type LiturgicalReadingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter, which LiturgicalReading to fetch.
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiturgicalReadings to fetch.
+     */
+    orderBy?: LiturgicalReadingOrderByWithRelationInput | LiturgicalReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LiturgicalReadings.
+     */
+    cursor?: LiturgicalReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiturgicalReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiturgicalReadings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LiturgicalReadings.
+     */
+    distinct?: LiturgicalReadingScalarFieldEnum | LiturgicalReadingScalarFieldEnum[]
+  }
+
+  /**
+   * LiturgicalReading findMany
+   */
+  export type LiturgicalReadingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter, which LiturgicalReadings to fetch.
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LiturgicalReadings to fetch.
+     */
+    orderBy?: LiturgicalReadingOrderByWithRelationInput | LiturgicalReadingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LiturgicalReadings.
+     */
+    cursor?: LiturgicalReadingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LiturgicalReadings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LiturgicalReadings.
+     */
+    skip?: number
+    distinct?: LiturgicalReadingScalarFieldEnum | LiturgicalReadingScalarFieldEnum[]
+  }
+
+  /**
+   * LiturgicalReading create
+   */
+  export type LiturgicalReadingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a LiturgicalReading.
+     */
+    data: XOR<LiturgicalReadingCreateInput, LiturgicalReadingUncheckedCreateInput>
+  }
+
+  /**
+   * LiturgicalReading createMany
+   */
+  export type LiturgicalReadingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LiturgicalReadings.
+     */
+    data: LiturgicalReadingCreateManyInput | LiturgicalReadingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LiturgicalReading createManyAndReturn
+   */
+  export type LiturgicalReadingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * The data used to create many LiturgicalReadings.
+     */
+    data: LiturgicalReadingCreateManyInput | LiturgicalReadingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LiturgicalReading update
+   */
+  export type LiturgicalReadingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a LiturgicalReading.
+     */
+    data: XOR<LiturgicalReadingUpdateInput, LiturgicalReadingUncheckedUpdateInput>
+    /**
+     * Choose, which LiturgicalReading to update.
+     */
+    where: LiturgicalReadingWhereUniqueInput
+  }
+
+  /**
+   * LiturgicalReading updateMany
+   */
+  export type LiturgicalReadingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LiturgicalReadings.
+     */
+    data: XOR<LiturgicalReadingUpdateManyMutationInput, LiturgicalReadingUncheckedUpdateManyInput>
+    /**
+     * Filter which LiturgicalReadings to update
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * Limit how many LiturgicalReadings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiturgicalReading updateManyAndReturn
+   */
+  export type LiturgicalReadingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * The data used to update LiturgicalReadings.
+     */
+    data: XOR<LiturgicalReadingUpdateManyMutationInput, LiturgicalReadingUncheckedUpdateManyInput>
+    /**
+     * Filter which LiturgicalReadings to update
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * Limit how many LiturgicalReadings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiturgicalReading upsert
+   */
+  export type LiturgicalReadingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the LiturgicalReading to update in case it exists.
+     */
+    where: LiturgicalReadingWhereUniqueInput
+    /**
+     * In case the LiturgicalReading found by the `where` argument doesn't exist, create a new LiturgicalReading with this data.
+     */
+    create: XOR<LiturgicalReadingCreateInput, LiturgicalReadingUncheckedCreateInput>
+    /**
+     * In case the LiturgicalReading was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LiturgicalReadingUpdateInput, LiturgicalReadingUncheckedUpdateInput>
+  }
+
+  /**
+   * LiturgicalReading delete
+   */
+  export type LiturgicalReadingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+    /**
+     * Filter which LiturgicalReading to delete.
+     */
+    where: LiturgicalReadingWhereUniqueInput
+  }
+
+  /**
+   * LiturgicalReading deleteMany
+   */
+  export type LiturgicalReadingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LiturgicalReadings to delete
+     */
+    where?: LiturgicalReadingWhereInput
+    /**
+     * Limit how many LiturgicalReadings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LiturgicalReading without action
+   */
+  export type LiturgicalReadingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LiturgicalReading
+     */
+    select?: LiturgicalReadingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LiturgicalReading
+     */
+    omit?: LiturgicalReadingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
   export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
   };
 
@@ -2078,12 +3367,43 @@ export namespace Prisma {
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
+  export const LiturgicalReadingScalarFieldEnum: {
+    id: 'id',
+    cycle: 'cycle',
+    season: 'season',
+    weekOfSeason: 'weekOfSeason',
+    dayOfWeek: 'dayOfWeek',
+    isFeast: 'isFeast',
+    feastMonth: 'feastMonth',
+    feastDay: 'feastDay',
+    title: 'title',
+    gospelRef: 'gospelRef',
+    gospelText: 'gospelText',
+    reflection: 'reflection',
+    prayerText: 'prayerText',
+    prayerResponse: 'prayerResponse',
+    imageUrl: 'imageUrl',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LiturgicalReadingScalarFieldEnum = (typeof LiturgicalReadingScalarFieldEnum)[keyof typeof LiturgicalReadingScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   export const NullsOrder: {
@@ -2107,9 +3427,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -2128,9 +3462,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -2249,6 +3597,120 @@ export namespace Prisma {
     closingPrayer?: BoolWithAggregatesFilter<"Post"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
+  }
+
+  export type LiturgicalReadingWhereInput = {
+    AND?: LiturgicalReadingWhereInput | LiturgicalReadingWhereInput[]
+    OR?: LiturgicalReadingWhereInput[]
+    NOT?: LiturgicalReadingWhereInput | LiturgicalReadingWhereInput[]
+    id?: StringFilter<"LiturgicalReading"> | string
+    cycle?: StringFilter<"LiturgicalReading"> | string
+    season?: StringFilter<"LiturgicalReading"> | string
+    weekOfSeason?: IntFilter<"LiturgicalReading"> | number
+    dayOfWeek?: StringFilter<"LiturgicalReading"> | string
+    isFeast?: BoolFilter<"LiturgicalReading"> | boolean
+    feastMonth?: IntNullableFilter<"LiturgicalReading"> | number | null
+    feastDay?: IntNullableFilter<"LiturgicalReading"> | number | null
+    title?: StringFilter<"LiturgicalReading"> | string
+    gospelRef?: StringFilter<"LiturgicalReading"> | string
+    gospelText?: StringFilter<"LiturgicalReading"> | string
+    reflection?: StringFilter<"LiturgicalReading"> | string
+    prayerText?: StringNullableFilter<"LiturgicalReading"> | string | null
+    prayerResponse?: StringNullableFilter<"LiturgicalReading"> | string | null
+    imageUrl?: StringNullableFilter<"LiturgicalReading"> | string | null
+    createdAt?: DateTimeFilter<"LiturgicalReading"> | Date | string
+    updatedAt?: DateTimeFilter<"LiturgicalReading"> | Date | string
+  }
+
+  export type LiturgicalReadingOrderByWithRelationInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+    season?: SortOrder
+    weekOfSeason?: SortOrder
+    dayOfWeek?: SortOrder
+    isFeast?: SortOrder
+    feastMonth?: SortOrderInput | SortOrder
+    feastDay?: SortOrderInput | SortOrder
+    title?: SortOrder
+    gospelRef?: SortOrder
+    gospelText?: SortOrder
+    reflection?: SortOrder
+    prayerText?: SortOrderInput | SortOrder
+    prayerResponse?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LiturgicalReadingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LiturgicalReadingWhereInput | LiturgicalReadingWhereInput[]
+    OR?: LiturgicalReadingWhereInput[]
+    NOT?: LiturgicalReadingWhereInput | LiturgicalReadingWhereInput[]
+    cycle?: StringFilter<"LiturgicalReading"> | string
+    season?: StringFilter<"LiturgicalReading"> | string
+    weekOfSeason?: IntFilter<"LiturgicalReading"> | number
+    dayOfWeek?: StringFilter<"LiturgicalReading"> | string
+    isFeast?: BoolFilter<"LiturgicalReading"> | boolean
+    feastMonth?: IntNullableFilter<"LiturgicalReading"> | number | null
+    feastDay?: IntNullableFilter<"LiturgicalReading"> | number | null
+    title?: StringFilter<"LiturgicalReading"> | string
+    gospelRef?: StringFilter<"LiturgicalReading"> | string
+    gospelText?: StringFilter<"LiturgicalReading"> | string
+    reflection?: StringFilter<"LiturgicalReading"> | string
+    prayerText?: StringNullableFilter<"LiturgicalReading"> | string | null
+    prayerResponse?: StringNullableFilter<"LiturgicalReading"> | string | null
+    imageUrl?: StringNullableFilter<"LiturgicalReading"> | string | null
+    createdAt?: DateTimeFilter<"LiturgicalReading"> | Date | string
+    updatedAt?: DateTimeFilter<"LiturgicalReading"> | Date | string
+  }, "id">
+
+  export type LiturgicalReadingOrderByWithAggregationInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+    season?: SortOrder
+    weekOfSeason?: SortOrder
+    dayOfWeek?: SortOrder
+    isFeast?: SortOrder
+    feastMonth?: SortOrderInput | SortOrder
+    feastDay?: SortOrderInput | SortOrder
+    title?: SortOrder
+    gospelRef?: SortOrder
+    gospelText?: SortOrder
+    reflection?: SortOrder
+    prayerText?: SortOrderInput | SortOrder
+    prayerResponse?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LiturgicalReadingCountOrderByAggregateInput
+    _avg?: LiturgicalReadingAvgOrderByAggregateInput
+    _max?: LiturgicalReadingMaxOrderByAggregateInput
+    _min?: LiturgicalReadingMinOrderByAggregateInput
+    _sum?: LiturgicalReadingSumOrderByAggregateInput
+  }
+
+  export type LiturgicalReadingScalarWhereWithAggregatesInput = {
+    AND?: LiturgicalReadingScalarWhereWithAggregatesInput | LiturgicalReadingScalarWhereWithAggregatesInput[]
+    OR?: LiturgicalReadingScalarWhereWithAggregatesInput[]
+    NOT?: LiturgicalReadingScalarWhereWithAggregatesInput | LiturgicalReadingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    cycle?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    season?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    weekOfSeason?: IntWithAggregatesFilter<"LiturgicalReading"> | number
+    dayOfWeek?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    isFeast?: BoolWithAggregatesFilter<"LiturgicalReading"> | boolean
+    feastMonth?: IntNullableWithAggregatesFilter<"LiturgicalReading"> | number | null
+    feastDay?: IntNullableWithAggregatesFilter<"LiturgicalReading"> | number | null
+    title?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    gospelRef?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    gospelText?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    reflection?: StringWithAggregatesFilter<"LiturgicalReading"> | string
+    prayerText?: StringNullableWithAggregatesFilter<"LiturgicalReading"> | string | null
+    prayerResponse?: StringNullableWithAggregatesFilter<"LiturgicalReading"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"LiturgicalReading"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"LiturgicalReading"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LiturgicalReading"> | Date | string
   }
 
   export type PostCreateInput = {
@@ -2391,10 +3853,150 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LiturgicalReadingCreateInput = {
+    id?: string
+    cycle?: string
+    season: string
+    weekOfSeason: number
+    dayOfWeek: string
+    isFeast?: boolean
+    feastMonth?: number | null
+    feastDay?: number | null
+    title: string
+    gospelRef: string
+    gospelText: string
+    reflection: string
+    prayerText?: string | null
+    prayerResponse?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LiturgicalReadingUncheckedCreateInput = {
+    id?: string
+    cycle?: string
+    season: string
+    weekOfSeason: number
+    dayOfWeek: string
+    isFeast?: boolean
+    feastMonth?: number | null
+    feastDay?: number | null
+    title: string
+    gospelRef: string
+    gospelText: string
+    reflection: string
+    prayerText?: string | null
+    prayerResponse?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LiturgicalReadingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cycle?: StringFieldUpdateOperationsInput | string
+    season?: StringFieldUpdateOperationsInput | string
+    weekOfSeason?: IntFieldUpdateOperationsInput | number
+    dayOfWeek?: StringFieldUpdateOperationsInput | string
+    isFeast?: BoolFieldUpdateOperationsInput | boolean
+    feastMonth?: NullableIntFieldUpdateOperationsInput | number | null
+    feastDay?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: StringFieldUpdateOperationsInput | string
+    gospelRef?: StringFieldUpdateOperationsInput | string
+    gospelText?: StringFieldUpdateOperationsInput | string
+    reflection?: StringFieldUpdateOperationsInput | string
+    prayerText?: NullableStringFieldUpdateOperationsInput | string | null
+    prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiturgicalReadingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cycle?: StringFieldUpdateOperationsInput | string
+    season?: StringFieldUpdateOperationsInput | string
+    weekOfSeason?: IntFieldUpdateOperationsInput | number
+    dayOfWeek?: StringFieldUpdateOperationsInput | string
+    isFeast?: BoolFieldUpdateOperationsInput | boolean
+    feastMonth?: NullableIntFieldUpdateOperationsInput | number | null
+    feastDay?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: StringFieldUpdateOperationsInput | string
+    gospelRef?: StringFieldUpdateOperationsInput | string
+    gospelText?: StringFieldUpdateOperationsInput | string
+    reflection?: StringFieldUpdateOperationsInput | string
+    prayerText?: NullableStringFieldUpdateOperationsInput | string | null
+    prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiturgicalReadingCreateManyInput = {
+    id?: string
+    cycle?: string
+    season: string
+    weekOfSeason: number
+    dayOfWeek: string
+    isFeast?: boolean
+    feastMonth?: number | null
+    feastDay?: number | null
+    title: string
+    gospelRef: string
+    gospelText: string
+    reflection: string
+    prayerText?: string | null
+    prayerResponse?: string | null
+    imageUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LiturgicalReadingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cycle?: StringFieldUpdateOperationsInput | string
+    season?: StringFieldUpdateOperationsInput | string
+    weekOfSeason?: IntFieldUpdateOperationsInput | number
+    dayOfWeek?: StringFieldUpdateOperationsInput | string
+    isFeast?: BoolFieldUpdateOperationsInput | boolean
+    feastMonth?: NullableIntFieldUpdateOperationsInput | number | null
+    feastDay?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: StringFieldUpdateOperationsInput | string
+    gospelRef?: StringFieldUpdateOperationsInput | string
+    gospelText?: StringFieldUpdateOperationsInput | string
+    reflection?: StringFieldUpdateOperationsInput | string
+    prayerText?: NullableStringFieldUpdateOperationsInput | string | null
+    prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LiturgicalReadingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cycle?: StringFieldUpdateOperationsInput | string
+    season?: StringFieldUpdateOperationsInput | string
+    weekOfSeason?: IntFieldUpdateOperationsInput | number
+    dayOfWeek?: StringFieldUpdateOperationsInput | string
+    isFeast?: BoolFieldUpdateOperationsInput | boolean
+    feastMonth?: NullableIntFieldUpdateOperationsInput | number | null
+    feastDay?: NullableIntFieldUpdateOperationsInput | number | null
+    title?: StringFieldUpdateOperationsInput | string
+    gospelRef?: StringFieldUpdateOperationsInput | string
+    gospelText?: StringFieldUpdateOperationsInput | string
+    reflection?: StringFieldUpdateOperationsInput | string
+    prayerText?: NullableStringFieldUpdateOperationsInput | string | null
+    prayerResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2402,13 +4004,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2416,13 +4019,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -2437,8 +4041,8 @@ export namespace Prisma {
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -2521,8 +4125,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2530,6 +4134,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -2538,8 +4143,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2547,6 +4152,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -2555,8 +4161,8 @@ export namespace Prisma {
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -2579,8 +4185,8 @@ export namespace Prisma {
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -2589,6 +4195,105 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type LiturgicalReadingCountOrderByAggregateInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+    season?: SortOrder
+    weekOfSeason?: SortOrder
+    dayOfWeek?: SortOrder
+    isFeast?: SortOrder
+    feastMonth?: SortOrder
+    feastDay?: SortOrder
+    title?: SortOrder
+    gospelRef?: SortOrder
+    gospelText?: SortOrder
+    reflection?: SortOrder
+    prayerText?: SortOrder
+    prayerResponse?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LiturgicalReadingAvgOrderByAggregateInput = {
+    weekOfSeason?: SortOrder
+    feastMonth?: SortOrder
+    feastDay?: SortOrder
+  }
+
+  export type LiturgicalReadingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+    season?: SortOrder
+    weekOfSeason?: SortOrder
+    dayOfWeek?: SortOrder
+    isFeast?: SortOrder
+    feastMonth?: SortOrder
+    feastDay?: SortOrder
+    title?: SortOrder
+    gospelRef?: SortOrder
+    gospelText?: SortOrder
+    reflection?: SortOrder
+    prayerText?: SortOrder
+    prayerResponse?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LiturgicalReadingMinOrderByAggregateInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+    season?: SortOrder
+    weekOfSeason?: SortOrder
+    dayOfWeek?: SortOrder
+    isFeast?: SortOrder
+    feastMonth?: SortOrder
+    feastDay?: SortOrder
+    title?: SortOrder
+    gospelRef?: SortOrder
+    gospelText?: SortOrder
+    reflection?: SortOrder
+    prayerText?: SortOrder
+    prayerResponse?: SortOrder
+    imageUrl?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LiturgicalReadingSumOrderByAggregateInput = {
+    weekOfSeason?: SortOrder
+    feastMonth?: SortOrder
+    feastDay?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -2615,10 +4320,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2631,8 +4344,8 @@ export namespace Prisma {
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2645,8 +4358,8 @@ export namespace Prisma {
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -2661,8 +4374,8 @@ export namespace Prisma {
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -2672,8 +4385,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2689,8 +4402,8 @@ export namespace Prisma {
 
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -2700,8 +4413,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -2717,8 +4430,8 @@ export namespace Prisma {
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -2733,8 +4446,8 @@ export namespace Prisma {
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -2752,8 +4465,8 @@ export namespace Prisma {
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -2762,6 +4475,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
 

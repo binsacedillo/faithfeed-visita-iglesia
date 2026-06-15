@@ -18,7 +18,9 @@ const VerticalFeed: React.FC = () => {
   });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentDay, setCurrentDay] = useState<string | null>(null);
-  const [currentSeason, setCurrentSeason] = useState<"HOLY_WEEK" | "EASTER_SEASON" | "ORDINARY_TIME" | "PENTECOST" | null>(null);
+  const [currentSeason, setCurrentSeason] = useState<string | null>(null);
+  const [liturgicalWeek, setLiturgicalWeek] = useState<number>(1);
+  const [liturgicalCycle, setLiturgicalCycle] = useState<"A" | "B" | "C">("B");
   const [selectedDevotion, setSelectedDevotion] = useState<"VISITA_IGLESIA" | "STATIONS_OF_CROSS">("VISITA_IGLESIA");
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +35,23 @@ const VerticalFeed: React.FC = () => {
     const liturgicalState = getLiturgicalState(today, mockSeason);
     setCurrentDay(liturgicalState.currentDay);
     setCurrentSeason(liturgicalState.currentSeason);
+    setLiturgicalWeek(liturgicalState.weekOfSeason ?? 1);
+    setLiturgicalCycle(liturgicalState.cycle ?? "B");
   }, []);
+
+  const { data: liturgicalReading } = api.post.getLiturgicalReading.useQuery(
+    {
+      season: currentSeason ?? "",
+      weekOfSeason: liturgicalWeek,
+      dayOfWeek: currentDay ?? "",
+      cycle: liturgicalCycle,
+    },
+    {
+      enabled: hasMounted && !!currentSeason && !!currentDay,
+      staleTime: 1000 * 60 * 5,
+    }
+  );
+
 
   const scrollRef = useRef<number | null>(null);
 
@@ -81,13 +99,39 @@ const VerticalFeed: React.FC = () => {
   const easterSeasonPosts = currentDay === "EASTER_SEASON"
     ? EASTER_SEASON_SUPPLEMENTS.filter((item) => !safePosts.some((post) => post.id === item.id))
     : [];
-  const todayLiturgicalPosts = [...todayScriptures, ...easterSeasonPosts];
+
+  const activeReadingPost = liturgicalReading ? {
+    id: liturgicalReading.id,
+    type: "SCRIPTURE",
+    title: liturgicalReading.title,
+    content: liturgicalReading.gospelText,
+    scriptureRef: liturgicalReading.gospelRef,
+    author: liturgicalReading.reflection,
+    prayerText: liturgicalReading.prayerText,
+    prayerResponse: liturgicalReading.prayerResponse,
+    imageUrl: liturgicalReading.imageUrl,
+    category: "GENERAL",
+    closingPrayer: false,
+    stationNumber: null,
+    introText: null,
+    outroText: null,
+    scheduledDay: currentDay,
+    createdAt: new Date(liturgicalReading.createdAt),
+    updatedAt: new Date(liturgicalReading.updatedAt),
+  } : null;
+
+  const todayLiturgicalPosts = [
+    ...todayScriptures,
+    ...(activeReadingPost ? [activeReadingPost] : []),
+    ...easterSeasonPosts
+  ];
   const filteredGeneralPosts = safePosts.filter(p => !p.scheduledDay && (p.category === selectedDevotion || p.category === "GENERAL"));
   const ordinaryPosts = safePosts.filter(p => !p.scheduledDay && p.category === "GENERAL");
   
   const isDevotionAvailable = currentDay === "THURSDAY" || currentDay === "FRIDAY";
   const shouldUseOrdinaryTheme = currentSeason === "ORDINARY_TIME";
-  const hasSeasonHeader = todayLiturgicalPosts.length > 0 || currentDay === "EASTER_SEASON" || currentDay === "ORDINARY_TIME" || currentDay === "PENTECOST";
+  const hasSeasonHeader = todayLiturgicalPosts.length > 0 || currentDay === "EASTER_SEASON" || currentDay === "ORDINARY_TIME" || currentDay === "PENTECOST" || !!currentSeason;
+
   const displayedGeneralPosts = isDevotionAvailable ? filteredGeneralPosts : ordinaryPosts;
   const theme = currentDay === "EASTER" || currentDay === "EASTER_SEASON"
     ? "easter"

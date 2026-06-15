@@ -4,8 +4,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./db.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Post {
@@ -29,4 +29,27 @@ model Post {
 
   @@index([type])
   @@index([category])
+}
+
+model LiturgicalReading {
+  id             String   @id @default(cuid())
+  cycle          String   @default("ANY") // "A", "B", "C", or "ANY"
+  season         String // "ADVENT", "CHRISTMAS", "LENT", "EASTER_SEASON", "ORDINARY_TIME", "PENTECOST", etc.
+  weekOfSeason   Int // e.g., 1 to 34
+  dayOfWeek      String // "SUNDAY", "MONDAY", ..., "SATURDAY"
+  isFeast        Boolean  @default(false)
+  feastMonth     Int?
+  feastDay       Int?
+  title          String
+  gospelRef      String
+  gospelText     String
+  reflection     String
+  prayerText     String?
+  prayerResponse String?
+  imageUrl       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([season, weekOfSeason, dayOfWeek, cycle])
+  @@index([feastMonth, feastDay])
 }

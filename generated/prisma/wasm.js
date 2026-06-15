@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -110,9 +113,34 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.LiturgicalReadingScalarFieldEnum = {
+  id: 'id',
+  cycle: 'cycle',
+  season: 'season',
+  weekOfSeason: 'weekOfSeason',
+  dayOfWeek: 'dayOfWeek',
+  isFeast: 'isFeast',
+  feastMonth: 'feastMonth',
+  feastDay: 'feastDay',
+  title: 'title',
+  gospelRef: 'gospelRef',
+  gospelText: 'gospelText',
+  reflection: 'reflection',
+  prayerText: 'prayerText',
+  prayerResponse: 'prayerResponse',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -122,7 +150,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Post: 'Post',
+  LiturgicalReading: 'LiturgicalReading'
 };
 /**
  * Create the Client
@@ -162,23 +191,22 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
-  "postinstall": false,
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": null,
-        "value": "file:./db.sqlite"
+        "fromEnvVar": "DATABASE_URL",
+        "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./db.sqlite\"\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  category       String   @default(\"GENERAL\")\n  scheduledDay   String?\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n  @@index([category])\n}\n",
-  "inlineSchemaHash": "0821ca72851573a2f9183243ec0a885660aa41559d65ce220d2fc9513963ed9e",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id             String   @id @default(cuid())\n  type           String\n  title          String\n  content        String\n  author         String?\n  scriptureRef   String?\n  imageUrl       String?\n  stationNumber  Int?\n  prayerText     String?\n  prayerResponse String?\n  introText      String?\n  outroText      String?\n  category       String   @default(\"GENERAL\")\n  scheduledDay   String?\n  closingPrayer  Boolean  @default(false)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([type])\n  @@index([category])\n}\n\nmodel LiturgicalReading {\n  id             String   @id @default(cuid())\n  cycle          String   @default(\"ANY\") // \"A\", \"B\", \"C\", or \"ANY\"\n  season         String // \"ADVENT\", \"CHRISTMAS\", \"LENT\", \"EASTER_SEASON\", \"ORDINARY_TIME\", \"PENTECOST\", etc.\n  weekOfSeason   Int // e.g., 1 to 34\n  dayOfWeek      String // \"SUNDAY\", \"MONDAY\", ..., \"SATURDAY\"\n  isFeast        Boolean  @default(false)\n  feastMonth     Int?\n  feastDay       Int?\n  title          String\n  gospelRef      String\n  gospelText     String\n  reflection     String\n  prayerText     String?\n  prayerResponse String?\n  imageUrl       String?\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@index([season, weekOfSeason, dayOfWeek, cycle])\n  @@index([feastMonth, feastDay])\n}\n",
+  "inlineSchemaHash": "3c12e7bc8233014288fcd99eed9e5781b70c711d18a8f97001de6c8aee4b0c89",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scriptureRef\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stationNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prayerText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"introText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"outroText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scheduledDay\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"closingPrayer\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scriptureRef\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stationNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prayerText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"introText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"outroText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"scheduledDay\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"closingPrayer\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"LiturgicalReading\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cycle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"season\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"weekOfSeason\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"dayOfWeek\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isFeast\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"feastMonth\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"feastDay\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gospelRef\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gospelText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reflection\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerText\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prayerResponse\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
@@ -191,7 +219,9 @@ config.engineWasm = {
 config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
-  parsed: {}
+  parsed: {
+    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+  }
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {

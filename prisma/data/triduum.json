@@ -1,0 +1,38 @@
+[
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "THURSDAY",
+    "title": "Holy Thursday",
+    "scriptureRef": "John 13:1",
+    "content": "Before the feast of Passover, Jesus knew that his hour had come to pass from this world to the Father. He loved them to the end.",
+    "author": "Jesus loved “to the end.” How far does my love go?",
+    "imageUrl": "/backgrounds/thursday.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "FRIDAY",
+    "title": "Good Friday",
+    "scriptureRef": "John 19:30",
+    "content": "When Jesus had taken the wine, he said, 'It is finished.' And bowing his head, he handed over the spirit.",
+    "author": "It is finished. He gave everything for you.",
+    "imageUrl": "/backgrounds/friday.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "SATURDAY",
+    "title": "Holy Saturday",
+    "scriptureRef": "Matthew 27:66",
+    "content": "So they went and made the tomb secure by sealing the stone and setting the guard.",
+    "author": "In the silence, God is working. Trust the wait.",
+    "imageUrl": "/backgrounds/saturday.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "EASTER",
+    "title": "Easter Sunday",
+    "scriptureRef": "John 20:1-9",
+    "content": "On the first day of the week, Mary of Magdala came to the tomb early in the morning... and saw the stone removed from the tomb. So she ran and went to Simon Peter... 'They have taken the Lord from the tomb, and we don’t know where they put him.'",
+    "author": "He is Risen! The tomb is empty. The world is reborn.",
+    "imageUrl": "/backgrounds/easter.jpg"
+  }
+]

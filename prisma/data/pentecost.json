@@ -1,0 +1,72 @@
+[
+  {
+    "type": "REFLECT",
+    "scheduledDay": "PENTECOST",
+    "title": "Pentecost Extended Vigil",
+    "content": "Welcome to the Pentecost Vigil. Tonight we wait in prayer, just as the apostles and Mary waited in the Upper Room, for the outpouring of the Holy Spirit. Let us open our hearts to the fire of His love.",
+    "author": "Faith Feed Reflection",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "First Reading: The Tower of Babel",
+    "scriptureRef": "Genesis 11:1-9",
+    "content": "The whole earth had one language and the same words... Then the Lord said: 'Come, let us go down and there confuse their language, so that no one will understand the speech of another.' Thus the Lord scattered them from there all over the earth.",
+    "author": "Human pride scatters and divides, but the Holy Spirit gathers and unites us in love.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "Second Reading: Mount Sinai in Fire",
+    "scriptureRef": "Exodus 19:3-8a, 16-20b",
+    "content": "On the morning of the third day there were peals of thunder and lightning, and a heavy cloud over the mountain... Mount Sinai was all wrapped in smoke, for the Lord came down upon it in fire.",
+    "author": "The Lord descends in fire. May the Holy Spirit purify our hearts with His holy flame.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "Third Reading: The Dry Bones",
+    "scriptureRef": "Ezekiel 37:1-14",
+    "content": "Thus says the Lord God to these bones: See! I will bring spirit into you, that you may come to life... I will put my spirit in you that you may live, and I will settle you upon your land.",
+    "author": "Breathe on us, Breath of God. Bring life and hope to our weary, dry places.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "Fourth Reading: Outpouring of the Spirit",
+    "scriptureRef": "Joel 3:1-5",
+    "content": "It shall come to pass: I will pour out my spirit upon all flesh. Your sons and daughters shall prophesy, your old men shall dream dreams, your young men shall see visions.",
+    "author": "A divine promise of renewal: God pours His Spirit onto all flesh to guide and inspire.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "Epistle: The Spirit Intercedes",
+    "scriptureRef": "Romans 8:22-27",
+    "content": "The Spirit too comes to the aid of our weakness; for we do not know how to pray as we ought, but the Spirit itself intercedes with inexpressible groanings.",
+    "author": "When we are weak or cannot find the words, the Holy Spirit prays in and through us.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "SCRIPTURE",
+    "scheduledDay": "PENTECOST",
+    "title": "Gospel: Rivers of Living Water",
+    "scriptureRef": "John 7:37-39",
+    "content": "Jesus stood up and exclaimed: 'Let anyone who thirsts come to me and drink. Whoever believes in me, as scripture says: Rivers of living water will flow from within him.'",
+    "author": "He spoke of the Spirit that those who came to believe in him were to receive.",
+    "imageUrl": "/backgrounds/pentecost.jpg"
+  },
+  {
+    "type": "REFLECT",
+    "scheduledDay": "PENTECOST",
+    "title": "Come, Holy Spirit",
+    "content": "Holy Spirit, Lord of Light, from Your clear celestial height, Thy pure beaming radiance give. Fill the inmost hearts of Your faithful, and enkindle in them the fire of Your love. Send forth Your Spirit and they shall be created, and You shall renew the face of the earth. Amen.",
+    "author": "Pentecost Prayer",
+    "imageUrl": "/backgrounds/outro.jpg"
+  }
+]

@@ -29,16 +29,48 @@ export const isBetweenInclusive = (date: Date, start: Date, end: Date): boolean 
   return dateM >= startM && dateM <= endM;
 };
 
+export const getAdventStart = (year: number): Date => {
+  const christmas = new Date(year, 11, 25);
+  const dayOfWeek = christmas.getDay();
+  // Advent starts 4 Sundays before Christmas.
+  // We find the Sunday before Christmas, then go back 3 weeks (21 days).
+  const daysToSubtract = (dayOfWeek === 0 ? 7 : dayOfWeek) + 21;
+  const advent1 = new Date(year, 11, 25);
+  advent1.setDate(christmas.getDate() - daysToSubtract);
+  return new Date(advent1.getFullYear(), advent1.getMonth(), advent1.getDate());
+};
+
+export const getLiturgicalCycle = (date: Date): "A" | "B" | "C" => {
+  const year = date.getFullYear();
+  const adventStart = getAdventStart(year);
+  
+  // If we are on or after the 1st Sunday of Advent, we are in the next year's cycle
+  const targetYear = date.getTime() >= adventStart.getTime() ? year + 1 : year;
+  
+  const remainder = (targetYear + 1) % 3;
+  if (remainder === 0) return "C";
+  if (remainder === 1) return "A";
+  return "B";
+};
+
 export interface LiturgicalState {
   currentDay: string | null;
-  currentSeason: "HOLY_WEEK" | "EASTER_SEASON" | "ORDINARY_TIME" | "PENTECOST" | null;
+  currentSeason: "HOLY_WEEK" | "EASTER_SEASON" | "ORDINARY_TIME" | "PENTECOST" | "ADVENT" | "LENT" | "CHRISTMAS" | null;
+  weekOfSeason?: number;
+  cycle?: "A" | "B" | "C";
 }
 
 export const getLiturgicalState = (today: Date, mockSeason?: string | null): LiturgicalState => {
+  const cycle = getLiturgicalCycle(today);
+  const DAYS = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+  const dayName = DAYS[today.getDay()] ?? null;
+
   if (mockSeason === "pentecost") {
     return {
       currentDay: "PENTECOST",
       currentSeason: "PENTECOST",
+      cycle,
+      weekOfSeason: 1,
     };
   }
 
@@ -54,27 +86,74 @@ export const getLiturgicalState = (today: Date, mockSeason?: string | null): Lit
   const pentecost = new Date(easter); pentecost.setDate(easter.getDate() + 49);
   const ordinaryTimeStart = new Date(pentecost); ordinaryTimeStart.setDate(pentecost.getDate() + 1);
 
+  // Ash Wednesday is 46 days before Easter
+  const ashWednesday = new Date(easter); ashWednesday.setDate(easter.getDate() - 46);
+
+  // Advent start
+  const adventStart = getAdventStart(currentYear);
+  // Christmas is Dec 25
+  const christmas = new Date(currentYear, 11, 25);
+  // Epiphany is usually Sunday between Jan 2 and Jan 8, let's keep Baptism/Ordinary start simplified relative to Christmas.
+  const baptismOfLord = new Date(currentYear, 0, 10); // Approximation for simplified calendar
+
+  // Holy Week Triduum check
   if (isSameDay(thu, todayMidnight) || isSameDay(wed, todayMidnight)) {
-    return { currentDay: "THURSDAY", currentSeason: "HOLY_WEEK" };
+    return { currentDay: "THURSDAY", currentSeason: "HOLY_WEEK", cycle };
   }
   if (isSameDay(fri, todayMidnight)) {
-    return { currentDay: "FRIDAY", currentSeason: "HOLY_WEEK" };
+    return { currentDay: "FRIDAY", currentSeason: "HOLY_WEEK", cycle };
   }
   if (isSameDay(sat, todayMidnight)) {
-    return { currentDay: "SATURDAY", currentSeason: "HOLY_WEEK" };
+    return { currentDay: "SATURDAY", currentSeason: "HOLY_WEEK", cycle };
   }
   if (isSameDay(easter, todayMidnight)) {
-    return { currentDay: "EASTER", currentSeason: "EASTER_SEASON" };
+    return { currentDay: "EASTER", currentSeason: "EASTER_SEASON", cycle, weekOfSeason: 1 };
   }
   if (isSameDay(pentecost, todayMidnight)) {
-    return { currentDay: "PENTECOST", currentSeason: "PENTECOST" };
-  }
-  if (isBetweenInclusive(today, easterMonday, new Date(pentecost.getTime() - 86400000))) {
-    return { currentDay: "EASTER_SEASON", currentSeason: "EASTER_SEASON" };
-  }
-  if (isBetweenInclusive(today, ordinaryTimeStart, new Date(currentYear, 11, 31))) {
-    return { currentDay: "ORDINARY_TIME", currentSeason: "ORDINARY_TIME" };
+    return { currentDay: "PENTECOST", currentSeason: "PENTECOST", cycle, weekOfSeason: 1 };
   }
 
-  return { currentDay: null, currentSeason: null };
+  // Lent
+  if (isBetweenInclusive(today, ashWednesday, new Date(thu.getTime() - 86400000))) {
+    const diffTime = todayMidnight - ashWednesday.getTime();
+    const diffDays = Math.floor(diffTime / 86400000);
+    const weekOfSeason = Math.floor(diffDays / 7) + 1;
+    return { currentDay: dayName, currentSeason: "LENT", cycle, weekOfSeason };
+  }
+
+  // Easter Season
+  if (isBetweenInclusive(today, easterMonday, new Date(pentecost.getTime() - 86400000))) {
+    const diffTime = todayMidnight - easter.getTime();
+    const diffDays = Math.floor(diffTime / 86400000);
+    const weekOfSeason = Math.floor(diffDays / 7) + 1;
+    return { currentDay: "EASTER_SEASON", currentSeason: "EASTER_SEASON", cycle, weekOfSeason };
+  }
+
+  // Advent
+  if (isBetweenInclusive(today, adventStart, new Date(christmas.getTime() - 86400000))) {
+    const diffTime = todayMidnight - adventStart.getTime();
+    const diffDays = Math.floor(diffTime / 86400000);
+    const weekOfSeason = Math.floor(diffDays / 7) + 1;
+    return { currentDay: dayName, currentSeason: "ADVENT", cycle, weekOfSeason };
+  }
+
+  // Ordinary Time
+  if (isBetweenInclusive(today, ordinaryTimeStart, new Date(currentYear, 11, 31))) {
+    const diffTime = todayMidnight - ordinaryTimeStart.getTime();
+    const diffDays = Math.floor(diffTime / 86400000);
+    // Pentecost is week 8/9 equivalent, Ordinary Time resumes around week 10
+    const weekOfSeason = Math.floor(diffDays / 7) + 10; 
+    return { currentDay: "ORDINARY_TIME", currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
+  }
+
+  // Ordinary Time (Before Lent)
+  if (isBetweenInclusive(today, baptismOfLord, new Date(ashWednesday.getTime() - 86400000))) {
+    const diffTime = todayMidnight - baptismOfLord.getTime();
+    const diffDays = Math.floor(diffTime / 86400000);
+    const weekOfSeason = Math.floor(diffDays / 7) + 1;
+    return { currentDay: "ORDINARY_TIME", currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
+  }
+
+  return { currentDay: dayName, currentSeason: null, cycle };
 };
+

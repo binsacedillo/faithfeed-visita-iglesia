@@ -1,0 +1,80 @@
+[
+  {
+    "cycle": "B",
+    "season": "EASTER_SEASON",
+    "weekOfSeason": 1,
+    "dayOfWeek": "SUNDAY",
+    "title": "Easter Sunday: The Resurrection of the Lord",
+    "gospelRef": "John 20:1-9",
+    "gospelText": "On the first day of the week, Mary of Magdala came to the tomb early in the morning, while it was still dark, and saw the stone removed from the tomb...",
+    "reflection": "The empty tomb is the starting point of our faith. We are invited to see and believe that love has conquered death.",
+    "prayerText": "Risen Jesus, deepen my faith in Your Resurrection.",
+    "prayerResponse": "Help me to live as a child of the light. Amen.",
+    "imageUrl": "/backgrounds/easter.jpg"
+  },
+  {
+    "cycle": "B",
+    "season": "EASTER_SEASON",
+    "weekOfSeason": 2,
+    "dayOfWeek": "SUNDAY",
+    "title": "Second Sunday of Easter (Divine Mercy Sunday)",
+    "gospelRef": "John 20:19-31",
+    "gospelText": "Jesus came and stood in their midst and said to them, 'Peace be with you.'",
+    "reflection": "Even in our doubt and fear, Jesus enters our locked rooms to bring us His peace and mercy.",
+    "prayerText": "Merciful Jesus, I trust in You.",
+    "prayerResponse": "Grant me Your peace that passes all understanding. Amen.",
+    "imageUrl": "/backgrounds/easter.jpg"
+  },
+  {
+    "cycle": "B",
+    "season": "ORDINARY_TIME",
+    "weekOfSeason": 11,
+    "dayOfWeek": "SUNDAY",
+    "title": "11th Sunday in Ordinary Time",
+    "gospelRef": "Mark 4:26-34",
+    "gospelText": "This is how it is with the kingdom of God; it is as if a man were to scatter seed on the land...",
+    "reflection": "Like a tiny mustard seed, God's kingdom grows quietly and invisibly in our hearts and in the world.",
+    "prayerText": "Lord, sow Your Word in my heart and make it fruitful.",
+    "prayerResponse": "May Your kingdom come in my words and actions today. Amen.",
+    "imageUrl": "/backgrounds/guide.jpg"
+  },
+  {
+    "cycle": "B",
+    "season": "ORDINARY_TIME",
+    "weekOfSeason": 12,
+    "dayOfWeek": "SUNDAY",
+    "title": "12th Sunday in Ordinary Time",
+    "gospelRef": "Mark 4:35-41",
+    "gospelText": "On that day, as evening drew on, Jesus said to his disciples, 'Let us cross to the other side.' A violent squall came up and waves were breaking over the boat... Jesus woke up, rebuked the wind, and said to the sea, 'Quiet! Be still!' The wind ceased and there was great calm.",
+    "reflection": "In the midst of life's sudden storms, we may feel overwhelmed and ask, 'Lord, do You not care?' But Jesus is in the boat with us, inviting us to move from fear to profound trust in His presence.",
+    "prayerText": "Jesus, speak Your peace to the storms in my heart and quiet my anxieties.",
+    "prayerResponse": "Quiet my fears, Lord, and anchor my trust in You. Amen.",
+    "imageUrl": "/backgrounds/guide.jpg"
+  },
+  {
+    "cycle": "B",
+    "season": "ORDINARY_TIME",
+    "weekOfSeason": 13,
+    "dayOfWeek": "SUNDAY",
+    "title": "13th Sunday in Ordinary Time",
+    "gospelRef": "Mark 5:21-43",
+    "gospelText": "Jairus, a synagogue official, fell at Jesus' feet and pleaded, 'My daughter is at the point of death. Come lay Your hands on her that she may live.' On the way, a woman touched His cloak and was healed of her hemorrhage. Jesus told Jairus: 'Do not be afraid; just have faith.'",
+    "reflection": "Both the suffering woman and the grieving father show us the power of reaching out to Jesus in active faith. He is the Lord of healing and life, telling us to not let fear consume us.",
+    "prayerText": "Lord Jesus, bring Your healing touch to my wounds and give me the grace to trust Your timing.",
+    "prayerResponse": "I believe, Lord; strengthen my faith and heal my heart. Amen.",
+    "imageUrl": "/backgrounds/guide.jpg"
+  },
+  {
+    "cycle": "C",
+    "season": "ADVENT",
+    "weekOfSeason": 1,
+    "dayOfWeek": "SUNDAY",
+    "title": "First Sunday of Advent",
+    "gospelRef": "Luke 21:25-28, 34-36",
+    "gospelText": "Stand erect and raise your heads because your redemption is at hand.",
+    "reflection": "Advent is a time of waiting and vigilance. We prepare our hearts to welcome Christ both at Christmas and in His glory.",
+    "prayerText": "Come, Lord Jesus, prepare my heart.",
+    "prayerResponse": "Help me to stay awake and prayerful. Amen.",
+    "imageUrl": "/backgrounds/thursday.jpg"
+  }
+]
