@@ -255,7 +255,7 @@ const VerticalFeed: React.FC = () => {
               {currentDay === "ORDINARY_TIME" && "🌿"}
             </div>
             <span className={styles.typeBadge} style={{ color: 'var(--accent-gold)', letterSpacing: '0.3em' }}>
-              {currentDay === "ORDINARY_TIME" ? "ORDINARY TIME" : 
+              {currentSeason === "ORDINARY_TIME" ? `${currentDay} - ORDINARY TIME` : 
                currentDay === "EASTER_SEASON" ? "EASTER SEASON" : 
                currentDay === "PENTECOST" ? "PENTECOST SUNDAY" : 
                `${currentDay} LITURGY`}
@@ -263,7 +263,7 @@ const VerticalFeed: React.FC = () => {
             <h1 style={{ fontSize: '2.75rem', marginTop: '0.5rem', marginBottom: '1.5rem' }}>Today's Word</h1>
             <div style={{ height: '2px', background: 'var(--accent-gold)', width: '60px', margin: '0 auto 1.5rem', opacity: 0.6 }} />
             <p style={{ opacity: 0.7, fontSize: '0.9rem', fontStyle: 'italic', letterSpacing: '0.05em' }}>
-              {currentDay === "ORDINARY_TIME"
+              {currentSeason === "ORDINARY_TIME"
                 ? "Walk in daily discipleship and reflect with the Gospel"
                 : currentDay === "EASTER_SEASON"
                   ? "Continue in resurrection joy through the weeks after Easter"
@@ -340,7 +340,7 @@ const VerticalFeed: React.FC = () => {
             marginTop: '2rem',
             color: 'var(--text-primary)'
           }}>
-            {currentDay === "ORDINARY_TIME"
+            {currentSeason === "ORDINARY_TIME"
               ? `A ${new Date().getFullYear()} Daily Faith Offering by Vince Gio Acedillo`
               : currentDay === "PENTECOST"
                 ? `A ${new Date().getFullYear()} Pentecost Offering by Vince Gio Acedillo`
@@ -353,7 +353,7 @@ const VerticalFeed: React.FC = () => {
               fontSize: '1rem',
               letterSpacing: '0.05em'
             }}>
-              {currentDay === "ORDINARY_TIME"
+              {currentSeason === "ORDINARY_TIME"
                 ? "Keep walking with Christ in Ordinary Time"
                 : currentDay === "PENTECOST"
                   ? "Go forth and renew the face of the earth"

@@ -143,7 +143,7 @@ export const getLiturgicalState = (today: Date, mockSeason?: string | null): Lit
     const diffDays = Math.floor(diffTime / 86400000);
     // Pentecost is week 8/9 equivalent, Ordinary Time resumes around week 10
     const weekOfSeason = Math.floor(diffDays / 7) + 10; 
-    return { currentDay: "ORDINARY_TIME", currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
+    return { currentDay: dayName, currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
   }
 
   // Ordinary Time (Before Lent)
@@ -151,7 +151,7 @@ export const getLiturgicalState = (today: Date, mockSeason?: string | null): Lit
     const diffTime = todayMidnight - baptismOfLord.getTime();
     const diffDays = Math.floor(diffTime / 86400000);
     const weekOfSeason = Math.floor(diffDays / 7) + 1;
-    return { currentDay: "ORDINARY_TIME", currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
+    return { currentDay: dayName, currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
   }
 
   return { currentDay: dayName, currentSeason: null, cycle };
