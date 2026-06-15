@@ -23,7 +23,7 @@ model Post {
   outroText      String?
   category       String   @default("GENERAL")
   scheduledDay   String?
-  closingPrayer  Boolean  @default(false)z
+  closingPrayer  Boolean  @default(false)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
