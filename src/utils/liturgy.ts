@@ -138,11 +138,11 @@ export const getLiturgicalState = (today: Date, mockSeason?: string | null): Lit
   }
 
   // Ordinary Time
-  if (isBetweenInclusive(today, ordinaryTimeStart, new Date(currentYear, 11, 31))) {
-    const diffTime = todayMidnight - ordinaryTimeStart.getTime();
+  if (isBetweenInclusive(today, ordinaryTimeStart, new Date(adventStart.getTime() - 86400000))) {
+    const diffTime = adventStart.getTime() - todayMidnight;
     const diffDays = Math.floor(diffTime / 86400000);
-    // Pentecost is week 8/9 equivalent, Ordinary Time resumes around week 10
-    const weekOfSeason = Math.floor(diffDays / 7) + 10; 
+    const weeksToAdvent = Math.floor((diffDays - 1) / 7);
+    const weekOfSeason = 34 - weeksToAdvent;
     return { currentDay: dayName, currentSeason: "ORDINARY_TIME", cycle, weekOfSeason };
   }
 
