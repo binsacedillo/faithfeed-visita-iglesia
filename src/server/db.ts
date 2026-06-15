@@ -2,9 +2,17 @@ import path from "path";
 import { env } from "~/env";
 import { PrismaClient } from "../../generated/prisma";
 
-// High-Fidelity Absolute Path Construction for Vercel
-const dbPath = path.join(process.cwd(), "prisma", "db.sqlite");
-const dbUrl = `file:${dbPath}`;
+const getDatabaseUrl = () => {
+  const envUrl = process.env.DATABASE_URL;
+  if (envUrl && (envUrl.startsWith("postgres:") || envUrl.startsWith("postgresql:"))) {
+    return envUrl;
+  }
+  // High-Fidelity Absolute Path Construction for local SQLite
+  const dbPath = path.join(process.cwd(), "prisma", "db.sqlite");
+  return `file:${dbPath}`;
+};
+
+const dbUrl = getDatabaseUrl();
 
 const createPrismaClient = () =>
   new PrismaClient({
